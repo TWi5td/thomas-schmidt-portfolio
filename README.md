@@ -6,9 +6,9 @@ This site was created using **GitHub Pages** to showcase my professional identit
 
 ## 🌐 Live Site
 
-View the portfolio at: [https://your-username.github.io/thomas-schmidt-portfolio](https://your-username.github.io/thomas-schmidt-portfolio)
+View the portfolio at: [https://TWi5td.github.io/thomas-schmidt-portfolio](https://TWi5td.github.io/thomas-schmidt-portfolio)
 
-> ⚠️ Replace `your-username` with your actual GitHub username once deployed.
+>TWi5td
 
 ## 📂 Contents
 
