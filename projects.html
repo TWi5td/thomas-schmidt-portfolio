@@ -19,19 +19,34 @@
         </nav>
     </header>
 
-    <section class="projects">
+   <section class="sections">
         <h2>Projects</h2>
-        <h3>Modbus/DNP Simulation Platform (Capstone, Spring 2025)</h3>
-        <p>Led design and testing of a low-cost Modbus/DNP simulation platform using Raspberry Pi to emulate substation IEDs. Configured Ethernet/RS-232 interfaces, troubleshooted hardware issues, and developed test plans. Tools: Raspberry Pi, Linux, oscilloscopes, multimeters.</p>
-        <img src="images/capstone_schematic.jpg" alt="Capstone Project Schematic" class="project-image">
-
-        <h3>Mealy FSM GCD Implementation (Spring 2024)</h3>
-        <p>Designed a GCD algorithm on a Zybo FPGA using VHDL, interfaced with physical switches, and validated functionality with oscilloscopes. Conducted component-level debugging. Tools: Vivado 2016.4, Zybo FPGA, oscilloscopes.</p>
-        <img src="images/fpga_output.jpg" alt="FPGA Oscilloscope Output" class="project-image">
-
-        <h3>Transistor Characterization (VLSI Design, Spring 2025)</h3>
-        <p>Analyzed NMOS transistor behavior in Cadence, plotting ID(VDS) and ID(VGS) curves to identify cut-off, linear, and saturation regions. Documented threshold voltages and subthreshold slopes. Tools: Cadence, Multisim.</p>
-        <img src="images/transistor_curves.jpg" alt="Transistor ID(VDS) Curve" class="project-image">
+    
+        <div class="project-details">
+            <h3>Modbus/DNP Simulation Platform (Capstone, Spring 2025)</h3>
+            <p>Led design and testing of a low-cost Modbus/DNP simulation platform using Raspberry Pi to emulate substation IEDs. Configured Ethernet/RS-232 interfaces, troubleshooted hardware issues, and developed test plans. Tools: Raspberry Pi, Linux, oscilloscopes, multimeters.</p>
+            <img src="images/capstone.png" alt="Capstone Project" class="project-img">
+        </div>
+    
+        <div class="project-details">
+            <h3>Mealy FSM GCD Calculator (Spring 2024)</h3>
+            <p>Designed and implemented a Mealy Finite State Machine (FSM) in Verilog to compute the Greatest Common Divisor (GCD) of two 8-bit integers using the Euclidean algorithm on a Zybo FPGA. Verified functionality through behavioral and post-synthesis simulations in Vivado 2016.4, testing input pairs like (8,20)=4, (18,45)=9, and (28,49)=7. Tools: Vivado 2016.4, Verilog, Zybo FPGA.</p>
+            <p><a href="https://github.com/TWi5/gcd-mealy-fsm" target="_blank">GitHub Repository</a> | <a href="docs/ECE_440_Lab_1_Report.pdf" target="_blank">Lab Report</a></p>
+            <img src="images/gcd_state_diagram.png" alt="GCD FSM State Diagram" class="project-img">
+        </div>
+    
+        <div class="project-details">
+            <h3>LFSR with BRAM Interface (Spring 2024)</h3>
+            <p>Developed a 4-bit Linear Feedback Shift Register (LFSR) in Verilog with a Block RAM (BRAM) interface on a Zybo FPGA, generating pseudo-random sequences for data scrambling applications. Validated through simulation in Vivado 2016.4. Tools: Vivado 2016.4, Verilog, Zybo FPGA. (Repository under development.)</p>
+            <p><a href="https://github.com/TWi5/lfsr-bram-verilog" target="_blank">GitHub Repository</a> (Coming Soon)</p>
+            <img src="images/lfsr_state_diagram.png" alt="LFSR State Diagram" class="project-img">
+        </div>
+    
+        <div class="project-details">
+            <h3>Transistor Characterization (VLSI Design, Spring 2025)</h3>
+            <p>Analyzed NMOS transistor behavior in Cadence, plotting ID(VDS) and ID(VGS) curves to identify cut-off, linear, and saturation regions. Documented threshold voltages and subthreshold slopes. Tools: Cadence, Multisim.</p>
+            <img src="images/transistor.png" alt="Transistor ID(VDS) Curve" class="project-img">
+        </div>
     </section>
 
     <footer>
