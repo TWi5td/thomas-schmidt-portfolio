@@ -1,6 +1,6 @@
 # Thomas Schmidt – E-Portfolio
 
-Welcome to my professional e-portfolio for **ENGL 317: Technical Writing II** at the University of Idaho.
+Welcome to my professional e-portfolio.
 
 This site was created using **GitHub Pages** to showcase my professional identity and supplement application materials for internships and career opportunities in the field of computer engineering.
 
