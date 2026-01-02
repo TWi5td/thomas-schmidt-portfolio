@@ -4,13 +4,13 @@ Welcome to my professional e-portfolio.
 
 This site was created using **GitHub Pages** to showcase my professional identity and supplement application materials for internships and career opportunities in the field of computer engineering.
 
-## 🌐 Live Site
+## Live Site
 
 View the portfolio at: [https://TWi5td.github.io/thomas-schmidt-portfolio](https://TWi5td.github.io/thomas-schmidt-portfolio)
 
 >TWi5td
 
-## 📂 Contents
+## Contents
 
 This repository contains:
 - `index.html` – Home page with introduction
@@ -19,7 +19,7 @@ This repository contains:
 - `assets/` – Folder for PDFs, images, and supporting documents
 - `style.css` – Optional styling for customization
 
-## 🔐 Privacy Notice
+## Privacy Notice
 
 To protect my personal information, this portfolio does not include my phone number or home address. A professional email and LinkedIn are provided for contact purposes.
 
