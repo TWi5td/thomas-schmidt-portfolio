@@ -7,18 +7,11 @@
     <link rel="stylesheet" href="../style.css">
 
     <style>
-        /* Wrapper to center the entire page layout */
-        .page-wrapper {
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        /* Fixed Sidebar Table of Contents */
+        /* Fixed Sidebar Table of Contents - further left */
         .sidebar-toc {
             position: fixed;
-            top: 140px;                  /* Starts below the header (adjust if header height changes) */
-            left: calc((100vw - 1200px) / 2); /* Aligns with left edge of centered content area */
+            top: 140px;                  /* Below the header */
+            left: 20px;                  /* Much more off to the left */
             width: 280px;
             background-color: #f8f8f8;
             padding: 1.5em;
@@ -62,29 +55,27 @@
             text-decoration: underline;
         }
 
-        /* Main content - centered with left padding to clear sidebar */
+        /* Main content - properly centered */
         .main-content {
-            margin-left: 320px;          /* Space for the sidebar */
-            margin-right: auto;
             max-width: 800px;
+            margin: 0 auto;              /* True centering */
             padding: 0 1em;
         }
 
-        /* Mobile responsiveness - stack TOC on top */
+        /* Mobile responsiveness - TOC on top */
         @media (max-width: 1100px) {
             .sidebar-toc {
                 position: static;
+                left: auto;
                 width: auto;
                 max-height: none;
                 overflow-y: visible;
                 margin: 2em auto;
                 box-shadow: none;
                 background-color: #f0f0f0;
-                left: auto;
             }
 
             .main-content {
-                margin-left: 0;
                 padding: 1em;
             }
         }
@@ -92,9 +83,6 @@
         @media (max-width: 600px) {
             .sidebar-toc {
                 padding: 1em;
-            }
-            .page-wrapper {
-                padding: 0;
             }
         }
     </style>
@@ -111,113 +99,109 @@
         </nav>
     </header>
 
-    <!-- Centering wrapper -->
-    <div class="page-wrapper">
+    <!-- Fixed Sidebar Table of Contents (far left on desktop) -->
+    <div class="sidebar-toc">
+        <h2>Table of Contents</h2>
+        <ul>
+            <li><a href="#capstone">Capstone Project</a></li>
+            <li><a href="#projects">Projects</a>
+                <ul>
+                    <li><a href="#music-genre">Music Genre Classification</a></li>
+                    <li><a href="#rust-chess">Rust Chess AI</a></li>
+                </ul>
+            </li>
+            <li><a href="#lab-reports">Lab Reports</a>
+                <ul>
+                    <li><a href="#mealy-fsm">Mealy FSM GCD Calculator</a></li>
+                    <li><a href="#lfsr">4-bit LFSR with BRAM</a></li>
+                    <li><a href="#transistor">Transistor Characterization</a></li>
+                </ul>
+            </li>
+            <li><a href="#research-papers">Research Papers</a>
+                <ul>
+                    <li><a href="#control-methods">Classical Control Methods</a></li>
+                    <li><a href="#vim-nano">Vim vs. Nano Usability</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
 
-        <!-- Fixed Sidebar Table of Contents (Desktop) -->
-        <div class="sidebar-toc">
-            <h2>Table of Contents</h2>
-            <ul>
-                <li><a href="#capstone">Capstone Project</a></li>
-                <li><a href="#projects">Projects</a>
-                    <ul>
-                        <li><a href="#music-genre">Music Genre Classification</a></li>
-                        <li><a href="#rust-chess">Rust Chess AI</a></li>
-                    </ul>
-                </li>
-                <li><a href="#lab-reports">Lab Reports</a>
-                    <ul>
-                        <li><a href="#mealy-fsm">Mealy FSM GCD Calculator</a></li>
-                        <li><a href="#lfsr">4-bit LFSR with BRAM</a></li>
-                        <li><a href="#transistor">Transistor Characterization</a></li>
-                    </ul>
-                </li>
-                <li><a href="#research-papers">Research Papers</a>
-                    <ul>
-                        <li><a href="#control-methods">Classical Control Methods</a></li>
-                        <li><a href="#vim-nano">Vim vs. Nano Usability</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
+    <!-- Centered Main Content -->
+    <div class="main-content">
 
-        <!-- Centered Main Content -->
-        <div class="main-content">
+        <!-- Capstone -->
+        <section id="capstone">
+            <h2>Capstone Project – SCADA Simulation Platform</h2>
+            <p>Designed and implemented a low-cost SCADA simulation platform using Raspberry Pi units to emulate substation IEDs with Modbus and DNP3 protocols. Supports SD-card configuration, real-time Ethernet and serial communication, and simulation of binary and analog points. Developed for integration with SEL RTACs for educational and testing scenarios.</p>
+            <a href="https://github.com/TWi5td/CAPSTONE_SCADA_sim_pi" target="_blank">View Code on GitHub</a>
+            |
+            <a href="../assets/capstone_summary.pdf" target="_blank">View Capstone Summary (PDF)</a>
+        </section>
 
-            <!-- Capstone -->
-            <section id="capstone">
-                <h2>Capstone Project – SCADA Simulation Platform</h2>
-                <p>Designed and implemented a low-cost SCADA simulation platform using Raspberry Pi units to emulate substation IEDs with Modbus and DNP3 protocols. Supports SD-card configuration, real-time Ethernet and serial communication, and simulation of binary and analog points. Developed for integration with SEL RTACs for educational and testing scenarios.</p>
-                <a href="https://github.com/TWi5td/CAPSTONE_SCADA_sim_pi" target="_blank">View Code on GitHub</a>
+        <!-- Projects -->
+        <section id="projects">
+            <h2>Projects</h2>
+
+            <div class="project-details" id="music-genre">
+                <h3>Music Genre Classification (CS 4771, Fall 2025)</h3>
+                <p>Developed machine learning models to classify songs into genres using audio feature extraction and supervised learning techniques. Tools: Python, scikit-learn, librosa.</p>
+                <a href="https://github.com/TWi5td/cs4771-music-genre-classification" target="_blank">Github Repository</a>
                 |
-                <a href="../assets/capstone_summary.pdf" target="_blank">View Capstone Summary (PDF)</a>
-            </section>
+                <a href="https://github.com/TWi5td/cs4771-music-genre-classification/blob/main/proposal/project_proposal.md" target="_blank">Project Proposal</a>
+            </div>
 
-            <!-- Projects -->
-            <section id="projects">
-                <h2>Projects</h2>
+            <div class="project-details" id="rust-chess">
+                <h3>Rust Chess AI</h3>
+                <p>A chess engine and GUI written in Rust using Macroquad. Features alpha-beta pruning, quiescence search, and a custom evaluation function.</p>
+                <a href="https://github.com/TWi5td/RustChessAi" target="_blank">View Code on GitHub</a>
+                |
+                <a href="../assets/Cs210_Semester_Project_Part5.pdf" target="_blank">View Final Project Report (PDF)</a>
+            </div>
+        </section>
 
-                <div class="project-details" id="music-genre">
-                    <h3>Music Genre Classification (CS 4771, Fall 2025)</h3>
-                    <p>Developed machine learning models to classify songs into genres using audio feature extraction and supervised learning techniques. Tools: Python, scikit-learn, librosa.</p>
-                    <a href="https://github.com/TWi5td/cs4771-music-genre-classification" target="_blank">Github Repository</a>
-                    |
-                    <a href="https://github.com/TWi5td/cs4771-music-genre-classification/blob/main/proposal/project_proposal.md" target="_blank">Project Proposal</a>
-                </div>
+        <!-- Lab Reports -->
+        <section id="lab-reports">
+            <h2>Lab Reports</h2>
+            
+            <div class="project-details" id="mealy-fsm">
+                <h3>Mealy FSM GCD Calculator (Spring 2024)</h3>
+                <p>Designed and implemented a Mealy FSM in Verilog to compute the GCD of two 8-bit integers using the Euclidean algorithm on a Zybo FPGA. Verified functionality through behavioral and post-synthesis simulations in Vivado 2016.4.</p>
+                <a href="https://github.com/TWi5td/fpga-gcd-vhdl" target="_blank">View Code on GitHub</a>
+                |
+                <a href="../assets/ECE_440_Lab_1_Report.pdf" target="_blank">View Lab Report (PDF)</a>
+            </div>
 
-                <div class="project-details" id="rust-chess">
-                    <h3>Rust Chess AI</h3>
-                    <p>A chess engine and GUI written in Rust using Macroquad. Features alpha-beta pruning, quiescence search, and a custom evaluation function.</p>
-                    <a href="https://github.com/TWi5td/RustChessAi" target="_blank">View Code on GitHub</a>
-                    |
-                    <a href="../assets/Cs210_Semester_Project_Part5.pdf" target="_blank">View Final Project Report (PDF)</a>
-                </div>
-            </section>
+            <div class="project-details" id="lfsr">
+                <h3>4-bit LFSR with BRAM Interface (Spring 2024)</h3>
+                <p>Designed a 4-bit LFSR interfaced with an 8-entry BRAM on a Zybo FPGA, generating and storing pseudo-random sequences. Managed multi-clock domains and implemented a circular buffer.</p>
+                <a href="https://github.com/TWi5td/lfsr-bram-verilog" target="_blank">View Code on GitHub</a>
+                |
+                <a href="../assets/ECE_440_Lab_4_Report.pdf" target="_blank">View Lab Report (PDF)</a>
+            </div>
 
-            <!-- Lab Reports -->
-            <section id="lab-reports">
-                <h2>Lab Reports</h2>
-                
-                <div class="project-details" id="mealy-fsm">
-                    <h3>Mealy FSM GCD Calculator (Spring 2024)</h3>
-                    <p>Designed and implemented a Mealy FSM in Verilog to compute the GCD of two 8-bit integers using the Euclidean algorithm on a Zybo FPGA. Verified functionality through behavioral and post-synthesis simulations in Vivado 2016.4.</p>
-                    <a href="https://github.com/TWi5td/fpga-gcd-vhdl" target="_blank">View Code on GitHub</a>
-                    |
-                    <a href="../assets/ECE_440_Lab_1_Report.pdf" target="_blank">View Lab Report (PDF)</a>
-                </div>
+            <div class="project-details" id="transistor">
+                <h3>Transistor Characterization (VLSI Design, Spring 2025)</h3>
+                <p>Analyzed NMOS transistor behavior in Cadence, plotting ID(VDS) and ID(VGS) curves to identify cut-off, linear, and saturation regions. Documented threshold voltages and subthreshold slopes.</p>
+                <a href="../assets/ECE_445_Lab_1_Report.pdf" target="_blank">View Lab Report (PDF)</a>
+            </div>
+        </section>
 
-                <div class="project-details" id="lfsr">
-                    <h3>4-bit LFSR with BRAM Interface (Spring 2024)</h3>
-                    <p>Designed a 4-bit LFSR interfaced with an 8-entry BRAM on a Zybo FPGA, generating and storing pseudo-random sequences. Managed multi-clock domains and implemented a circular buffer.</p>
-                    <a href="https://github.com/TWi5td/lfsr-bram-verilog" target="_blank">View Code on GitHub</a>
-                    |
-                    <a href="../assets/ECE_440_Lab_4_Report.pdf" target="_blank">View Lab Report (PDF)</a>
-                </div>
+        <!-- Research Papers -->
+        <section id="research-papers">
+            <h2>Research Papers</h2>
+            <div class="project-details" id="control-methods">
+                <h3>ECE 4700: Final Project – Comparative Study of Classical Control Methods</h3>
+                <p>This paper critically examines the limitations of the Routh-Hurwitz criterion and root locus technique in classical control theory. It compares their computational effort, information content, and practical shortcomings, using a DC motor position control example. The study highlights why modern robust control methods (e.g., H∞ and LQR) are essential for real-world applications.</p>
+                <a href="../assets/ECE_4700_Final_Project.pdf" target="_blank">View Final Project Paper (PDF)</a>
+            </div>
+            <div class="project-details" id="vim-nano">
+                <h3>ENGL 317: Usability Report – Vim vs. Nano</h3>
+                <p>This report compares two terminal-based code editors from a usability standpoint. It applies user-centered testing principles learned in ENGL 317.</p>
+                <a href="../assets/vim_vs_nano_report.pdf" target="_blank">View Report (PDF)</a>
+            </div>
+        </section>
 
-                <div class="project-details" id="transistor">
-                    <h3>Transistor Characterization (VLSI Design, Spring 2025)</h3>
-                    <p>Analyzed NMOS transistor behavior in Cadence, plotting ID(VDS) and ID(VGS) curves to identify cut-off, linear, and saturation regions. Documented threshold voltages and subthreshold slopes.</p>
-                    <a href="../assets/ECE_445_Lab_1_Report.pdf" target="_blank">View Lab Report (PDF)</a>
-                </div>
-            </section>
-
-            <!-- Research Papers -->
-            <section id="research-papers">
-                <h2>Research Papers</h2>
-                <div class="project-details" id="control-methods">
-                    <h3>ECE 4700: Final Project – Comparative Study of Classical Control Methods</h3>
-                    <p>This paper critically examines the limitations of the Routh-Hurwitz criterion and root locus technique in classical control theory. It compares their computational effort, information content, and practical shortcomings, using a DC motor position control example. The study highlights why modern robust control methods (e.g., H∞ and LQR) are essential for real-world applications.</p>
-                    <a href="../assets/ECE_4700_Final_Project.pdf" target="_blank">View Final Project Paper (PDF)</a>
-                </div>
-                <div class="project-details" id="vim-nano">
-                    <h3>ENGL 317: Usability Report – Vim vs. Nano</h3>
-                    <p>This report compares two terminal-based code editors from a usability standpoint. It applies user-centered testing principles learned in ENGL 317.</p>
-                    <a href="../assets/vim_vs_nano_report.pdf" target="_blank">View Report (PDF)</a>
-                </div>
-            </section>
-
-        </div> <!-- End main-content -->
-    </div> <!-- End page-wrapper -->
+    </div> <!-- End main-content -->
 
     <footer>
         <p>Contact: <a href="mailto:twschmidt2001@gmail.com">twschmidt2001@gmail.com</a> | (208) 660-0234 |
