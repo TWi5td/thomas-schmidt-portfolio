@@ -6,7 +6,7 @@
     <title>Thomas Schmidt – Sample Work</title>
     <link rel="stylesheet" href="../style.css">
     <style>
-        /* Fixed Sidebar Table of Contents - responsive width and position */
+        /* Table of Contents */
         .sidebar-toc {
             position: fixed;
             top: 235px;                  /* Clears the blue header */
@@ -54,7 +54,7 @@
             text-decoration: underline;
         }
     
-        /* Main content - properly centered */
+        /* Main content - centered */
         .main-content {
             max-width: 800px;
             margin: 0 auto;              /* True centering */
@@ -99,33 +99,28 @@
         </nav>
     </header>
 
-    <!-- Fixed Sidebar Table of Contents (far left, below header on desktop) -->
-    <div class="sidebar-toc">
-        <h2>Table of Contents</h2>
+    <!-- Table of Contents-->
+    <!-- Layout wrapper -->
+    <div class="layout">
+      <!-- Fixed sidebar Table of Contents -->
+      <nav id="toc" aria-label="Table of Contents">
+        <h3>Table of Contents</h3>
         <ul>
-            <li><a href="#capstone">Capstone Project</a></li>
-            <li><a href="#projects">Projects</a>
-                <ul>
-                    <li><a href="#music-genre">Music Genre Classification</a></li>
-                    <li><a href="#rust-chess">Rust Chess AI</a></li>
-                </ul>
-            </li>
-            <li><a href="#lab-reports">Lab Reports</a>
-                <ul>
-                    <li><a href="#mealy-fsm">Mealy FSM GCD Calculator</a></li>
-                    <li><a href="#lfsr">4-bit LFSR with BRAM</a></li>
-                    <li><a href="#transistor">Transistor Characterization</a></li>
-                </ul>
-            </li>
-            <li><a href="#research-papers">Research Papers</a>
-                <ul>
-                    <li><a href="#control-methods">Classical Control Methods</a></li>
-                    <li><a href="#vim-nano">Vim vs. Nano Usability</a></li>
-                    <li><a href="#biological-enhancements">High School Senior Paper</a></li>
-                </ul>
-            </li>
+          <li>#capstoneCapstone Project</a></li>
+          <li>#projectsProjects</a></li>
+          <li>#music-genreMusic Genre Classification</a></li>
+          <li>#rust-chessRust Chess AI</a></li>
+          <li>#lab-reportsLab Reports</a></li>
+          <li>#mealy-fsmMealy FSM GCD Calculator</a></li>
+          <li>#lfsr4-bit LFSR with BRAM</a></li>
+          <li>#transistorTransistor Characterization</a></li>
+          <li>#research-papersResearch Papers</a></li>
+          <li>#control-methodsClassical Control Methods</a></li>
+          <li>#vim-nanoVim vs. Nano Usability</a></li>
+          <li>#biological-enhancementsHigh School Senior Paper</a></li>
         </ul>
-    </div>
+      </nav>
+
 
     <!-- Centered Main Content -->
     <div class="main-content">
