@@ -1,109 +1,200 @@
+
 /* style.css */
 body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
-    line-height: 1.6;
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  color: #333;
+  line-height: 1.6;
 }
 
 header {
-    background-color: #004080; /* Professional dark blue */
-    color: white;
-    text-align: center;
-    padding: 2em 0;
+  background-color: #004080; /* Professional dark blue */
+  color: white;
+  text-align: center;
+  padding: 2em 0;
 }
 
 header h1 {
-    margin: 0;
-    font-size: 2.5em;
+  margin: 0;
+  font-size: 2.5em;
 }
 
 header p {
-    margin: 0.5em 0;
-    font-size: 1.2em;
+  margin: 0.5em 0;
+  font-size: 1.2em;
 }
 
 .headshot {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    margin: 1em 0;
-    object-fit: cover;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin: 1em 0;
+  object-fit: cover;
 }
 
 nav {
-    margin: 1em 0;
+  margin: 1em 0;
 }
 
-nav a {
-    color: white;
-    text-decoration: none;
-    margin: 0 1em;
-    font-weight: bold;
+/* Top links inside header use white text */
+nav.top-links a {
+  color: white;
+  text-decoration: none;
+  margin: 0 1em;
+  font-weight: bold;
+}
+nav.top-links a:hover {
+  text-decoration: underline;
 }
 
-nav a:hover {
-    text-decoration: underline;
-}
-
+/* Generic section styling */
 section {
-    max-width: 800px;
-    margin: 2em auto;
-    padding: 1em;
-    background-color: white;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  max-width: 800px;
+  margin: 2em auto;
+  padding: 1em;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
 .welcome h2, .skills h2 {
-    color: #004080;
-    border-bottom: 2px solid #004080;
-    padding-bottom: 0.3em;
+  color: #004080;
+  border-bottom: 2px solid #004080;
+  padding-bottom: 0.3em;
 }
 
 .skills ul {
-    list-style-type: none;
-    padding: 0;
+  list-style-type: none;
+  padding: 0;
 }
-
 .skills ul li {
-    background: #e0e0e0;
-    margin: 0.5em 0;
-    padding: 0.5em;
-    border-radius: 5px;
+  background: #e0e0e0;
+  margin: 0.5em 0;
+  padding: 0.5em;
+  border-radius: 5px;
 }
 
 footer {
-    text-align: center;
-    padding: 1em 0;
-    background-color: #004080;
-    color: white;
-    position: relative;
-    bottom: 0;
-    width: 100%;
+  text-align: center;
+  padding: 1em 0;
+  background-color: #004080;
+  color: white;
+  position: relative;
+  bottom: 0;
+  width: 100%;
 }
-
 footer a {
-    color: #add8e6;
-    text-decoration: none;
+  color: #add8e6;
+  text-decoration: none;
 }
-
 footer a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 /* Responsive Design */
 @media (max-width: 600px) {
-    header h1 {
-        font-size: 2em;
-    }
-    nav a {
-        display: block;
-        margin: 0.5em 0;
-    }
-    section {
-        margin: 1em;
-        padding: 1em;
-    }
+  header h1 {
+    font-size: 2em;
+  }
+  nav.top-links a {
+    display: inline-block; /* keep header nav horizontal; switch to block if you prefer */
+    margin: 0.25em 0.75em;
+  }
+  section {
+    margin: 1em;
+    padding: 1em;
+  }
+}
+
+/* --- Fixed Table of Contents sidebar layout (added) --- */
+:root {
+  --page-max-width: 1100px;
+  --sidebar-width: 240px;
+  --sidebar-gap: 24px;
+  --header-height: 140px;   /* Approx height of your header; tweak if ToC overlaps */
+  --toc-top-offset: 16px;
+  --accent: #0b5fff;
+  --border: #e4e7ec;
+}
+
+/* Container that holds sidebar + content columns */
+.layout {
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+  padding: 0 16px;
+  display: grid;
+  grid-template-columns: var(--sidebar-width) 1fr;
+  grid-column-gap: var(--sidebar-gap);
+}
+
+/* Fixed sidebar Table of Contents */
+#toc {
+  position: fixed;
+  left: calc((100vw - var(--page-max-width)) / 2 + 16px);
+  top: calc(var(--header-height) + var(--toc-top-offset));
+  width: var(--sidebar-width);
+  max-height: calc(100vh - var(--header-height) - var(--toc-top-offset) - 24px);
+  overflow: auto;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0,0,0,.06);
+  z-index: 10; /* keeps it above content shadows if needed */
+}
+
+/* ToC styles */
+#toc h3 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+  color: #111827;
+}
+#toc ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+#toc li + li {
+  margin-top: 8px;
+}
+#toc a {
+  text-decoration: none;
+  color: #1f2937;
+}
+#toc a:hover,
+#toc a:focus {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+/* Main column nudged so it doesn't sit underneath the fixed ToC */
+#content {
+  margin-left: calc(var(--sidebar-width) + var(--sidebar-gap));
+}
+
+/* Ensure anchored headings aren't hidden when jumping to IDs */
+section[id] {
+  scroll-margin-top: calc(var(--header-height) + var(--toc-top-offset) + 12px);
+}
+
+/* Responsive: stack layout and make ToC inline on small screens */
+@media (max-width: 900px) {
+  .layout {
+    display: block;
+    padding: 0 12px;
+  }
+  #toc {
+    position: static;
+    width: auto;
+    max-height: none;
+    margin: 16px 0;
+    left: auto;
+    top: auto;
+    box-shadow: none;      /* optional: simplify on mobile */
+    border-radius: 6px;
+  }
+  #content {
+    margin-left: 0;
+  }
 }
