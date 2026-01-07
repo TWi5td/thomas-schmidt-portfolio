@@ -51,6 +51,13 @@ nav.top-links a:hover {
   text-decoration: underline;
 }
 
+nav.top-links a:focus-visible{
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+  text-decoration: none;
+}
+
+
 /* Generic section styling */
 section {
   max-width: 800px;
@@ -178,11 +185,16 @@ html, body, .layout { overflow: visible; }
 
 /* toc links */
 .toc a {
-  color: #004080;           /* professional dark blue */
+  color: black;           /* professional dark blue */
   text-decoration: none;
 }
 .toc a:hover {
- 
+
+.toc a:focus-visible{
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+  text-decoration: none;
+}
 
 
 
