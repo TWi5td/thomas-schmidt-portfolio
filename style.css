@@ -38,27 +38,20 @@ nav {
   margin: 1em 0;
 }
 
-/* Top links inside header use white text */
-nav.top-links a {
+/* links always white */
+a:link,
+a:visited,
+a:active,
+a:focus {
   color: white;
   text-decoration: none;
-  margin: 0 1em;
-  font-weight: bold;
 }
 
-nav.top-links a:link {
-  color: white;
-}
-nav.top-links a:visited {
-  color: white;
-}
-nav.top-links a:hover {
-  color: white;
+a:hover {
   text-decoration: underline;
 }
-nav.top-links a:active {
-  color: white;
-}
+
+
 
 
 /* Generic section styling */
@@ -186,7 +179,6 @@ html, body, .layout { overflow: visible; }
   padding-left: 0.25rem;
 }
 
-.toc a:hover { text-decoration: underline; }
 
 /* ---- Main column: let children shrink nicely ---- */
 main { min-width: 0; }
