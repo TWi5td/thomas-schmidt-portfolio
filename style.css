@@ -198,10 +198,10 @@ html, body, .layout { overflow: visible; }
 
 
 
-/* ---- Main column: let children shrink nicely ---- */
+/* ---- Main column ---- */
 main { min-width: 0; }
 
-/* Your existing section styles + zoom-friendly max width */
+/* zoom-friendly max width */
 section {
   max-width: var(--section-max);
   margin: 2rem auto;
@@ -220,7 +220,7 @@ section * {
   overflow-wrap: anywhere;
 }
 
-/* Optional: cap rail height and scroll inside during zoom */
+/* cap rail height and scroll inside during zoom */
 .rail .card {
   max-height: calc(100vh - 2 * var(--sticky-top));
   overflow: auto;
