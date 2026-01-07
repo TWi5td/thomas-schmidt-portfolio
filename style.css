@@ -177,17 +177,13 @@ html, body, .layout { overflow: visible; }
 }
 
 /* toc links */
-.toc a:link,
-.toc a:visited,
-.toc a:active,
-.toc a:focus {
-  color: blue;
+.toc a {
+  color: #004080;           /* professional dark blue */
   text-decoration: none;
 }
-
 .toc a:hover {
-  text-decoration: underline;
-}
+ 
+
 
 
 /* ---- Main column: let children shrink nicely ---- */
