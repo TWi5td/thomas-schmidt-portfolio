@@ -5,50 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thomas Schmidt – Sample Work</title>
     <link rel="stylesheet" href="../style.css">
-    <style>
-        /* Page two-column layout */  
+    <style>   
+        /* Page: 3-column grid with the main locked to the center column */
         .page {
           display: grid;
           grid-template-columns:
-            280px                                   /* sidebar */
-            minmax(0, 1fr);                         /* main column fills remaining space */
+            280px                         /* left rail: sidebar TOC */
+            minmax(320px, 800px)          /* center: main content (capped at 800px) */
+            minmax(0, 1fr);               /* right rail: flexible gutter */
           gap: 24px;
-          max-width: 1200px;
-          margin: 0 auto;
+          max-width: none;                /* let the layout span full viewport */
           padding: 0 16px;
         }
         
-        /* Main content centered using auto margins inside the column */
+        /* Place grid children explicitly */
+        .sidebar-toc {
+          grid-column: 1;                 /* left rail */
+          background: transparent;
+          padding: 0;
+          border-radius: 0;
+          box-shadow: none;
+        }
+        
         .main-content {
-          max-width: 800px;
+          grid-column: 2;                 /* center column */
           width: 100%;
-          margin: 0 auto;                           /* <-- centers the block inside the 1fr column */
+          margin: 0;                      /* already centered by column position */
           padding: 0 1em;
         }
         
+        /* Optional: make TOC sticky */
         .sidebar-toc {
-            background-color: transparent;
-            padding: 0;
-            border-radius: 0;
-            box-shadow: none;
-            width: auto;
+          position: sticky;
+          top: 16px;
         }
         
-        /* Mobile: stack columns */
-        @media (max-width: 1100px) {
+        /* Responsive: collapse to one column */
+        @media (max-width: 900px) {
           .page {
-            grid-template-columns: 1fr;       /* single column */
+            grid-template-columns: minmax(0, 1fr);
+          }
+          .sidebar-toc, .main-content {
+            grid-column: 1;
           }
           .sidebar-toc {
-            margin: 16px 0;                    /* separate from main when stacked */
-            box-shadow: none;
-            background-color: #f0f0f0;
-            padding: 1em;
-          }
-          .main-content {           
-            justify-self: stretch;        /* fill the single column */
-            margin: 0;
-            padding: 1em;
+            order: -1;                    /* TOC above content on mobile */
           }
         }
     </style>
