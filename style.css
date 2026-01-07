@@ -45,9 +45,21 @@ nav.top-links a {
   margin: 0 1em;
   font-weight: bold;
 }
+
+nav.top-links a:link {
+  color: white;
+}
+nav.top-links a:visited {
+  color: white;
+}
 nav.top-links a:hover {
+  color: white;
   text-decoration: underline;
 }
+nav.top-links a:active {
+  color: white;
+}
+
 
 /* Generic section styling */
 section {
