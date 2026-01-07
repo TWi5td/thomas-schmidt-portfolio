@@ -39,12 +39,12 @@ nav {
 }
 
 /* page links */
-.top-links a{
+nav.top-links a{
   color: white;
   text-decoration: none;
 }
 
-.top-links a:hover {
+nav.top-links a:hover {
   text-decoration: underline;
 }
 
