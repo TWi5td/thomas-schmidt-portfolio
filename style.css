@@ -38,11 +38,11 @@ nav {
   margin: 1em 0;
 }
 
-/* links always white */
+/* page links */
 nav a:link,
-a:visited,
-a:active,
-a:focus {
+nav a:visited,
+nav a:active,
+nav a:focus {
   color: white;
   text-decoration: none;
 }
@@ -177,6 +177,19 @@ html, body, .layout { overflow: visible; }
 .toc li { 
   margin: 0.25rem 0;
   padding-left: 0.25rem;
+}
+
+/* toc links */
+nav a:link,
+nav a:visited,
+nav a:active,
+nav a:focus {
+  color: white;
+  text-decoration: none;
+}
+
+nav a:hover {
+  text-decoration: underline;
 }
 
 
