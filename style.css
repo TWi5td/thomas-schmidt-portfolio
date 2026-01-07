@@ -180,6 +180,16 @@ footer a:hover {
   text-decoration: underline;
 }
 
+#toc ul ul {
+  margin-left: 1em;
+  margin-top: 0.25em;
+}
+
+#toc ul ul li {
+  font-size: 0.9em;
+}
+
+
 /* Main column nudged so it doesn't sit underneath the fixed ToC */
 #content {
   margin-left: calc(var(--sidebar-width) + var(--sidebar-gap));
