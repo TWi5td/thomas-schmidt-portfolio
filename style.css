@@ -118,3 +118,100 @@ footer a:hover {
     padding: 1em;
   }
 }
+
+
+
+/* ---- Layout variables (zoom-friendly, rem-based) ---- */
+:root {
+  --rail-width: 18rem;            /* left rail width (~288px @ 16px base) */
+  --page-gap: 1.25rem;
+  --sticky-top: 1rem;
+  --section-max: clamp(36rem, 60ch, 72rem); /* fluid bounded main width */
+}
+
+/* ---- Three-column grid: LEFT rail | MAIN | EMPTY RIGHT ---- */
+.layout {
+  display: grid;
+  grid-template-columns: var(--rail-width) minmax(0, 1fr) var(--rail-width);
+  gap: var(--page-gap);
+  padding: var(--page-gap);
+  align-items: start;
+}
+
+/* Place items explicitly so column 3 remains empty spacing */
+.layout > .rail { grid-column: 1; }
+.layout > main   { grid-column: 2; }
+
+/* Ensure no ancestor overflow interferes with sticky behavior */
+html, body, .layout { overflow: visible; }
+
+/* ---- Sticky left rail ---- */
+.rail {
+  position: sticky;
+  top: var(--sticky-top);
+  align-self: start;
+  z-index: 10;
+}
+
+.card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  padding: 1rem;
+}
+
+/* TOC styles */
+.toc h4 {
+  margin: 0 0 .75rem;
+  color: #004080;
+}
+.toc ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.toc li { margin: .4rem 0; }
+.toc a {
+  color: #004080;
+  text-decoration: none;
+}
+.toc a:hover { text-decoration: underline; }
+
+/* ---- Main column: let children shrink nicely ---- */
+main { min-width: 0; }
+
+/* Your existing section styles + zoom-friendly max width */
+section {
+  max-width: var(--section-max);
+  margin: 2rem auto;
+  padding: 1rem;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Typography respects zoom */
+h1, h2, h3 { line-height: 1.2; }
+p, li { font-size: 1rem; }
+
+/* Prevent horizontal scrollbars from long text/URLs/code */
+section * {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* Optional: cap rail height and scroll inside during zoom */
+.rail .card {
+  max-height: calc(100vh - 2 * var(--sticky-top));
+  overflow: auto;
+}
+
+/* ---- Responsive: collapse to one column on narrow screens or extreme zoom ---- */
+@media (max-width: 64rem) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+  .rail {
+    position: static; /* or keep sticky if you prefer */
+    margin-bottom: var(--page-gap);
+  }
+}
