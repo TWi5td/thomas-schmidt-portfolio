@@ -165,16 +165,27 @@ html, body, .layout { overflow: visible; }
   margin: 0 0 .75rem;
   color: #004080;
 }
+
+/* Remove bullets but create indentation */
 .toc ul {
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding-left: 0;
 }
-.toc li { margin: .4rem 0; }
-.toc a {
-  color: #004080;
-  text-decoration: none;
+
+/* Indent child lists */
+.toc ul ul {
+  padding-left: 1rem;
+  border-left: 2px solid #e5eaf2;  /* subtle vertical guide */
+  margin-left: 0.5rem;
 }
+
+/* Item spacing */
+.toc li { 
+  margin: 0.25rem 0;
+  padding-left: 0.25rem;
+}
+
 .toc a:hover { text-decoration: underline; }
 
 /* ---- Main column: let children shrink nicely ---- */
