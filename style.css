@@ -39,10 +39,7 @@ nav {
 }
 
 /* page links */
-nav.top-links a:link,
-nav.top-links a:visited,
-nav.top-links a:active,
-nav.top-links a:focus {
+nav.top-links a{
   color: white;
   text-decoration: none;
 }
