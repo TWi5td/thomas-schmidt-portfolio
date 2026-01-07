@@ -16,17 +16,14 @@
           padding: 0 16px;                    /* small horizontal padding */
         }
         
-        /* Sidebar: static positioning (scrolls with page) */
         .sidebar-toc {
-          position: static;                   /* stays in normal flow */
-          width: 100%;                        /* full column width */
-          background-color: #f8f8f8;
-          padding: 1.5em;
-          border-radius: 8px;
-          box-shadow: 0 0 10px rgba(0,0,0,0.1);
-          /* remove top/left/max-height/overflow that were for fixed */
+            background-color: transparent;
+            padding: 0;
+            border-radius: 0;
+            box-shadow: none;
+            width: auto;
         }
-        
+
         /* Main content column */
         .main-content {
           max-width: 800px;                   /* optional — keeps readable line length */
