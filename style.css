@@ -39,16 +39,16 @@ nav {
 }
 
 /* page links */
-nav.top-links a{
+.top-links a{
   color: white;
   text-decoration: none;
 }
 
-nav.top-links a:hover {
+.top-links a:hover {
   text-decoration: underline;
 }
 
-nav.top-links a:focus-visible{
+.top-links a:focus-visible{
   outline: 2px solid currentColor;
   outline-offset: 2px;
   text-decoration: none;
