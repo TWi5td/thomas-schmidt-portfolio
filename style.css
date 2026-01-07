@@ -228,10 +228,11 @@ section * {
 /* ---- Responsive: collapse to one column on narrow screens or extreme zoom ---- */
 @media (max-width: 64rem) {
   .layout {
-    grid-template-columns: 1fr;
+    grid-column: 2 / span 2;
   }
   .rail {
     position: static; /* or keep sticky if you prefer */
     margin-bottom: var(--page-gap);
   }
 }
+
