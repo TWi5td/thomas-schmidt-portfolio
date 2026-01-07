@@ -39,7 +39,7 @@ nav {
 }
 
 /* links always white */
-a:link,
+nav a:link,
 a:visited,
 a:active,
 a:focus {
@@ -47,7 +47,7 @@ a:focus {
   text-decoration: none;
 }
 
-a:hover {
+nav a:hover {
   text-decoration: underline;
 }
 
