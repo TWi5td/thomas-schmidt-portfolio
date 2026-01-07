@@ -6,14 +6,24 @@
     <title>Thomas Schmidt – Sample Work</title>
     <link rel="stylesheet" href="../style.css">
     <style>
-        /* Page two-column layout */
+        /* Page two-column layout */  
         .page {
           display: grid;
-          grid-template-columns: 280px 1fr;   /* sidebar width + main */
-          gap: 24px;                          /* space between columns */
-          max-width: 1200px;                  /* total page width */
-          margin: 0 auto;                     /* center the page */
-          padding: 0 16px;                    /* small horizontal padding */
+          grid-template-columns:
+            280px                                   /* sidebar */
+            minmax(0, 1fr);                         /* main column fills remaining space */
+          gap: 24px;
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 16px;
+        }
+        
+        /* Main content centered using auto margins inside the column */
+        .main-content {
+          max-width: 800px;
+          width: 100%;
+          margin: 0 auto;                           /* <-- centers the block inside the 1fr column */
+          padding: 0 1em;
         }
         
         .sidebar-toc {
@@ -23,14 +33,6 @@
             box-shadow: none;
             width: auto;
         }
-
-        /* Main content column */
-        .main-content {
-          max-width: 800px;                   /* optional — keeps readable line length */
-          width: 100%;
-          margin: 0;                          /* grid handles centering within page */
-          padding: 0 1em;
-        }
         
         /* Mobile: stack columns */
         @media (max-width: 1100px) {
@@ -38,12 +40,14 @@
             grid-template-columns: 1fr;       /* single column */
           }
           .sidebar-toc {
-            margin: 2em 0;                    /* separate from main when stacked */
+            margin: 16px 0;                    /* separate from main when stacked */
             box-shadow: none;
             background-color: #f0f0f0;
             padding: 1em;
           }
-          .main-content {
+          .main-content {           
+            justify-self: stretch;        /* fill the single column */
+            margin: 0;
             padding: 1em;
           }
         }
