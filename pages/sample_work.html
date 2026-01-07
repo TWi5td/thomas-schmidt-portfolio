@@ -1,225 +1,220 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Thomas Schmidt – Sample Work</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  style.css
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thomas Schmidt – Sample Work</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        /* Fixed Sidebar Table of Contents - responsive width and position */
+        .sidebar-toc {
+            position: fixed;
+            top: 235px;                  /* Clears the blue header */
+            left: max(20px, calc((100vw - 1200px)/2 - 320px)); /* Responsive left alignment */
+            width: min(280px, 25vw);     /* Responsive width - adjust percentages/px as needed */
+            background-color: #f8f8f8;
+            padding: 1.5em;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            max-height: calc(100vh - 240px); /* Fills available viewport height */
+            overflow-y: auto;            /* Scrolls internally if TOC is too tall */
+            z-index: 10;
+        }
+    
+        .sidebar-toc h2 {
+            color: #004080;
+            border-bottom: 2px solid #004080;
+            padding-bottom: 0.5em;
+            margin-top: 0;
+            font-size: 1.4em;
+        }
+    
+        .sidebar-toc ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 1em 0;
+        }
+    
+        .sidebar-toc li {
+            margin: 0.8em 0;
+        }
+    
+        .sidebar-toc ul ul {
+            padding-left: 1.2em;
+            margin: 0.4em 0;
+        }
+    
+        .sidebar-toc a {
+            color: #004080;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    
+        .sidebar-toc a:hover {
+            text-decoration: underline;
+        }
+    
+        /* Main content - properly centered */
+        .main-content {
+            max-width: 800px;
+            margin: 0 auto;              /* True centering */
+            padding: 0 1em;
+        }
+    
+        /* Mobile responsiveness - TOC on top */
+        @media (max-width: 1100px) {
+            .sidebar-toc {
+                position: static;
+                top: auto;
+                left: auto;
+                width: auto;
+                max-height: none;
+                overflow-y: visible;
+                margin: 2em auto;
+                box-shadow: none;
+                background-color: #f0f0f0;
+            }
+    
+            .main-content {
+                padding: 1em;
+            }
+        }
+    
+        @media (max-width: 600px) {
+            .sidebar-toc {
+                padding: 1em;
+            }
+        }
+    </style>
 </head>
 <body>
+    <header>
+        <h1>Thomas Schmidt</h1>
+        <p>B.S. Computer Engineering | University of Idaho | Graduated December 2025</p>
+        <nav>
+            <a href="../index.html">Home</a> |
+            <a href="resume.html">Resume</a> |
+            <a href="sample_work.html">Sample Work</a> |
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
 
-  <!-- Title / header area -->
-  <header>
-    <h1>Thomas Schmidt – Sample Work</h1>
-    <p>Thomas Schmidt</p>
-    <p>
-      B.S. Computer Engineering <br>
-      University of Idaho <br>
-      Graduated December 2025
-    </p>
+    <!-- Fixed Sidebar Table of Contents (far left, below header on desktop) -->
+    <div class="sidebar-toc">
+        <h2>Table of Contents</h2>
+        <ul>
+            <li><a href="#capstone">Capstone Project</a></li>
+            <li><a href="#projects">Projects</a>
+                <ul>
+                    <li><a href="#music-genre">Music Genre Classification</a></li>
+                    <li><a href="#rust-chess">Rust Chess AI</a></li>
+                </ul>
+            </li>
+            <li><a href="#lab-reports">Lab Reports</a>
+                <ul>
+                    <li><a href="#mealy-fsm">Mealy FSM GCD Calculator</a></li>
+                    <li><a href="#lfsr">4-bit LFSR with BRAM</a></li>
+                    <li><a href="#transistor">Transistor Characterization</a></li>
+                </ul>
+            </li>
+            <li><a href="#research-papers">Research Papers</a>
+                <ul>
+                    <li><a href="#control-methods">Classical Control Methods</a></li>
+                    <li><a href="#vim-nano">Vim vs. Nano Usability</a></li>
+                    <li><a href="#biological-enhancements">High School Senior Paper</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
 
-    <!-- Top navigation links -->
-    <nav class="top-links">
-      ../index.htmlHome</a>
-      resume.htmlResume</a>
-      sample_work.htmlSample Work</a>
-      contact.htmlContact</a>
-    </nav>
-  </header>
+    <!-- Centered Main Content -->
+    <div class="main-content">
 
-  <!-- Layout wrapper: sidebar ToC + main content -->
-  <div class="layout">
+        <!-- Capstone -->
+        <section id="capstone">
+            <h2>Capstone Project – SCADA Simulation Platform</h2>
+            <p>Designed and implemented a low-cost SCADA simulation platform using Raspberry Pi units to emulate substation IEDs with Modbus and DNP3 protocols. Supports SD-card configuration, real-time Ethernet and serial communication, and simulation of binary and analog points. Developed for integration with SEL RTACs for educational and testing scenarios.</p>
+            <a href="https://github.com/TWi5td/CAPSTONE_SCADA_sim_pi" target="_blank">View Code on GitHub</a>
+            |
+            <a href="../assets/capstone_summary.pdf" target="_blank">View Capstone Summary (PDF)</a>
+        </section>
 
-    <!-- Fixed left Table of Contents -->
-    <nav id="toc" aria-label="Table of Contents">
-      <h3>Table of Contents</h3>
-      <ul>
-        <li>#capstoneCapstone Project</a></li>
-        <li>#projectsProjects</a></li>
-        <li>#music-genreMusic Genre Classification</a></li>
-        <li>#rust-chessRust Chess AI</a></li>
-        <li>#lab-reportsLab Reports</a></li>
-        <li>#mealy-fsmMealy FSM GCD Calculator</a></li>
-        <li>#lfsr4-bit LFSR with BRAM</a></li>
-        <li>#transistorTransistor Characterization</a></li>
-        <li>#research-papersResearch Papers</a></li>
-        <li>#control-methodsClassical Control Methods</a></li>
-        <li>#vim-nanoVim vs. Nano Usability</a></li>
-        <li>#biological-enhancementsHigh School Senior Paper</a></li>
-      </ul>
-    </nav>
+        <!-- Projects -->
+        <section id="projects">
+            <h2>Projects</h2>
 
-    <!-- Main content column -->
-    <main id="content">
+            <div class="project-details" id="music-genre">
+                <h3>Music Genre Classification (CS 4771, Fall 2025)</h3>
+                <p>Developed machine learning models to classify songs into genres using audio feature extraction and supervised learning techniques. Tools: Python, scikit-learn, librosa.</p>
+                <a href="https://github.com/TWi5td/cs4771-music-genre-classification" target="_blank">Github Repository</a>
+                |
+                <a href="https://github.com/TWi5td/cs4771-music-genre-classification/blob/main/proposal/project_proposal.md" target="_blank">Project Proposal</a>
+            </div>
 
-      <!-- Capstone -->
-      <section id="capstone">
-        <h3>Capstone Project – SCADA Simulation Platform</h3>
-        <p>
-          Designed and implemented a low-cost SCADA simulation platform using Raspberry Pi units to
-          emulate substation IEDs with Modbus and DNP3 protocols. Supports SD-card configuration,
-          real-time Ethernet and serial communication, and simulation of binary and analog points.
-          Developed for integration with SEL RTACs for educational and testing scenarios.
+            <div class="project-details" id="rust-chess">
+                <h3>Rust Chess AI</h3>
+                <p>A chess engine and GUI written in Rust using Macroquad. Features alpha-beta pruning, quiescence search, and a custom evaluation function.</p>
+                <a href="https://github.com/TWi5td/RustChessAi" target="_blank">View Code on GitHub</a>
+                |
+                <a href="../assets/Cs210_Semester_Project_Part5.pdf" target="_blank">View Final Project Report (PDF)</a>
+            </div>
+        </section>
+
+        <!-- Lab Reports -->
+        <section id="lab-reports">
+            <h2>Lab Reports</h2>
+            
+            <div class="project-details" id="mealy-fsm">
+                <h3>Mealy FSM GCD Calculator (Spring 2024)</h3>
+                <p>Designed and implemented a Mealy FSM in Verilog to compute the GCD of two 8-bit integers using the Euclidean algorithm on a Zybo FPGA. Verified functionality through behavioral and post-synthesis simulations in Vivado 2016.4.</p>
+                <a href="https://github.com/TWi5td/fpga-gcd-vhdl" target="_blank">View Code on GitHub</a>
+                |
+                <a href="../assets/ECE_440_Lab_1_Report.pdf" target="_blank">View Lab Report (PDF)</a>
+            </div>
+
+            <div class="project-details" id="lfsr">
+                <h3>4-bit LFSR with BRAM Interface (Spring 2024)</h3>
+                <p>Designed a 4-bit LFSR interfaced with an 8-entry BRAM on a Zybo FPGA, generating and storing pseudo-random sequences. Managed multi-clock domains and implemented a circular buffer.</p>
+                <a href="https://github.com/TWi5td/lfsr-bram-verilog" target="_blank">View Code on GitHub</a>
+                |
+                <a href="../assets/ECE_440_Lab_4_Report.pdf" target="_blank">View Lab Report (PDF)</a>
+            </div>
+
+            <div class="project-details" id="transistor">
+                <h3>Transistor Characterization (VLSI Design, Spring 2025)</h3>
+                <p>Analyzed NMOS transistor behavior in Cadence, plotting ID(VDS) and ID(VGS) curves to identify cut-off, linear, and saturation regions. Documented threshold voltages and subthreshold slopes.</p>
+                <a href="../assets/ECE_445_Lab_1_Report.pdf" target="_blank">View Lab Report (PDF)</a>
+            </div>
+        </section>
+
+        <!-- Research Papers -->
+        <section id="research-papers">
+            <h2>Research Papers</h2>
+            <div class="project-details" id="control-methods">
+                <h3>ECE 4700: Final Project – Comparative Study of Classical Control Methods</h3>
+                <p>This paper critically examines the limitations of the Routh-Hurwitz criterion and root locus technique in classical control theory. It compares their computational effort, information content, and practical shortcomings, using a DC motor position control example. The study highlights why modern robust control methods (e.g., H∞ and LQR) are essential for real-world applications.</p>
+                <a href="../assets/ECE_4700_Final_Project.pdf" target="_blank">View Final Project Paper (PDF)</a>
+            </div>
+            <div class="project-details" id="vim-nano">
+                <h3>ENGL 317: Usability Report – Vim vs. Nano</h3>
+                <p>This report compares two terminal-based code editors from a usability standpoint. It applies user-centered testing principles learned in ENGL 317.</p>
+                <a href="../assets/vim_vs_nano_report.pdf" target="_blank">View Report (PDF)</a>
+            </div>
+            <div class="project-details" id="biological-enhancements">
+                <h3>High School Senior Paper – Biological Enhancements and Society</h3>
+                <p>This argumentative paper examines the ethical and societal implications of biological enhancements to the human body. It explores three main concerns: the integrity of athletic competition in the face of performance-enhancing drugs, the environmental impact of life extension technologies on overpopulation, and the psychological effects of biological modifications. The paper argues that while enhancement technologies offer benefits, their widespread use poses significant risks to fairness, sustainability, and human identity.</p>
+                <a href="../assets/High_school_Senior_Paper.pdf" target="_blank">View Senior Paper (PDF)</a>
+            </div>
+        </section>
+
+    </div> <!-- End main-content -->
+
+    <footer>
+        <p>Contact: <a href="mailto:twschmidt2001@gmail.com">twschmidt2001@gmail.com</a> | (208) 660-0234 |
+            <a href="https://www.linkedin.com/in/thomaschmidt">LinkedIn</a> |
+            <a href="https://github.com/TWi5td">GitHub</a>
         </p>
-        <p>
-          https://github.com/TWi5td/CAPSTONE_SCADA_sim_piView Code on GitHub</a><br>
-          ../assets/capstone_summary.pdfView Capstone Summary (PDF)</a>
-        </p>
-      </section>
-
-      <!-- Projects -->
-      <section id="projects">
-        <h3>Projects</h3>
-
-        <article id="music-genre">
-          <h4>Music Genre Classification (CS 4771, Fall 2025)</h4>
-          <p>
-            Developed machine learning models to classify songs into genres using audio feature
-            extraction and supervised learning techniques. Tools: Python, scikit-learn, librosa.
-          </p>
-          <p>
-            https://github.com/TWi5td/cs4771-music-genre-classificationGithub Repository</a><br>
-            <a href="https://github.com/TWi5td/cs4771-music-genre-classification/blob/main/proposal/project_proposal.md" target/a>
-          </p>
-        </article>
-
-        <article id="rust-chess">
-          <h4>Rust Chess AI</h4>
-          <p>
-            A chess engine and GUI written in Rust using Macroquad. Features alpha-beta pruning,
-            quiescence search, and a custom evaluation function.
-          </p>
-          <p>
-            https://github.com/TWi5td/RustChessAiView Code on GitHub</a><br>
-            ../assets/Cs210_Semester_Project_Part5.pdfView Final Project Report (PDF)</a>
-          </p>
-        </article>
-      </section>
-
-      <!-- Lab Reports -->
-      <section id="lab-reports">
-        <h3>Lab Reports</h3>
-
-        <article id="mealy-fsm">
-          <h4>Mealy FSM GCD Calculator (Spring 2024)</h4>
-          <p>
-            Designed and implemented a Mealy FSM in Verilog to compute the GCD of two 8-bit integers
-            using the Euclidean algorithm on a Zybo FPGA. Verified functionality through behavioral
-            and post-synthesis simulations in Vivado 2016.4.
-          </p>
-          <p>
-            https://github.com/TWi5td/fpga-gcd-vhdlView Code on GitHub</a><br>
-            ../assets/ECE_440_Lab_1_Report.pdfView Lab Report (PDF)</a>
-          </p>
-        </article>
-
-        <article id="lfsr">
-          <h4>4-bit LFSR with BRAM Interface (Spring 2024)</h4>
-          <p>
-            Designed a 4-bit LFSR interfaced with an 8-entry BRAM on a Zybo FPGA, generating and
-            storing pseudo-random sequences. Managed multi-clock domains and implemented a circular buffer.
-          </p>
-          <p>
-            <ttps://github.com/TWi5td/lfsr-bram-verilogView Code on GitHub</a><br>
-            ../assets/ECE_440_Lab_4_Report.pdfView Lab Report (PDF)</a>
-          </p>
-        </article>
-
-        <article id="transistor">
-          <h4>Transistor Characterization (VLSI Design, Spring 2025)</h4>
-          <p>
-            Analyzed NMOS transistor behavior in Cadence, plotting ID(VDS) and ID(VGS) curves to identify
-            cut-off, linear, and saturation regions. Documented threshold voltages and subthreshold slopes.
-          </p>
-          <p>
-            ../assets/ECE_445_Lab_1_Report.pdfView Lab Report (PDF)</a>
-          </p>
-        </article>
-      </section>
-
-      <!-- Research Papers -->
-      <section id="research-papers">
-        <h3>Research Papers</h3>
-
-        <article id="control-methods">
-          <h4>ECE 4700: Final Project – Comparative Study of Classical Control Methods</h4>
-          <p>
-            This paper critically examines the limitations of the Routh-Hurwitz criterion and root locus
-            technique in classical control theory. It compares their computational effort, information
-            content, and practical shortcomings, using a DC motor position control example. The study
-            highlights why modern robust control methods (e.g., H∞ and LQR) are essential for real-world
-            applications.
-          </p>
-          <p>
-            ../assets/ECE_4700_Final_Project.pdfView Final Project Paper (PDF)</a>
-          </p>
-        </article>
-
-        <article id="vim-nano">
-          <h4>ENGL 317: Usability Report – Vim vs. Nano</h4>
-          <p>
-            This report compares two terminal-based code editors from a usability standpoint. It applies
-            user-centered testing principles learned in ENGL 317.
-          </p>
-          <p>
-            ../assets/vim_vs_nano_report.pdfView Report (PDF)</a>
-          </p>
-        </article>
-
-        <article id="biological-enhancements">
-          <h4>High School Senior Paper – Biological Enhancements and Society</h4>
-          <p>
-            This argumentative paper examines the ethical and societal implications of biological enhancements
-            to the human body. It explores three main concerns: the integrity of athletic competition in the
-            face of performance-enhancing drugs, the environmental impact of life extension technologies on
-            overpopulation, and the psychological effects of biological modifications. The paper argues that
-            while enhancement technologies offer benefits, their widespread use poses significant risks to
-            fairness, sustainability, and human identity.
-          </p>
-          <p>
-            ../assets/High_school_Senior_Paper.pdfView Senior Paper (PDF)</a>
-          </p>
-        </article>
-      </section>
-
-      <!-- Contact & footer -->
-      <section id="contact">
-        <h3>Contact</h3>
-        <p>
-          mailto:twschmidt2001@gmail.comtwschmidt2001@gmail.com</a><br>
-          (208) 660-0234<br>
-          https://www.linkedin.com/in/thomaschmidtLinkedIn</a> |
-          <a href/github.com/TWi5tdGitHub</a>
-        </p>
-      </section>
-    </main>
-  </div>
-
-  <footer>
-    © 2026 Thomas Schmidt. All rights reserved.
-  </footer>
-
-  <!-- Optional: highlight active section in ToC while scrolling -->
-  <script>
-    const tocLinks = [...document.querySelectorAll('#toc a')];
-    const sections = tocLinks
-      .map(a => document.querySelector(a.getAttribute('href')))
-      .filter(Boolean);
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        const id = entry.target.id;
-        const link = document.querySelector(`#toc a[href="#${id}"]`);
-        if (entry.isIntersecting) {
-          tocLinks.forEach(l => l.classList.remove('active'));
-          link?.classList.add('active');
-        }
-      });
-    }, { rootMargin: '0px 0px -60% 0px', threshold: 0.2 });
-
-    sections.forEach(sec => observer.observe(sec));
-  </script>
-
+        <p>&copy; 2026 Thomas Schmidt. All rights reserved.</p>
+    </footer>
 </body>
 </html>
