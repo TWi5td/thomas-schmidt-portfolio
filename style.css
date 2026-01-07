@@ -51,9 +51,6 @@ nav a:hover {
   text-decoration: underline;
 }
 
-
-
-
 /* Generic section styling */
 section {
   max-width: 800px;
@@ -180,11 +177,11 @@ html, body, .layout { overflow: visible; }
 }
 
 /* toc links */
-nav a:link,
-nav a:visited,
-nav a:active,
-nav a:focus {
-  color: white;
+toc a:link,
+toc a:visited,
+toc a:active,
+toc a:focus {
+  color: blue;
   text-decoration: none;
 }
 
