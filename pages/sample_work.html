@@ -5,52 +5,124 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thomas Schmidt – Sample Work</title>
     <link rel="stylesheet" href="../style.css">
-    <style>   
+    <style>
         /* Page: 3-column grid with the main locked to the center column */
         .page {
-          display: grid;
-          grid-template-columns:
-            280px                         /* left rail: sidebar TOC */
-            minmax(320px, 800px)          /* center: main content (capped at 800px) */
-            minmax(0, 1fr);               /* right rail: flexible gutter */
-          gap: 24px;
-          max-width: none;                /* let the layout span full viewport */
-          padding: 0 16px;
+        display: grid;
+        grid-template-columns:
+          280px                        /* left rail: sidebar TOC */
+          minmax(320px, 800px)         /* center: main content (capped at 800px) */
+          minmax(0, 1fr);              /* right rail: flexible gutter */
+        gap: 24px;
+        max-width: none;               /* let the layout span full viewport */
+        padding: 0 16px;
         }
         
         /* Place grid children explicitly */
         .sidebar-toc {
-          grid-column: 1;                 /* left rail */
-          background: transparent;
-          padding: 0;
-          border-radius: 0;
-          box-shadow: none;
+        grid-column: 1;                /* left rail */
+        background: transparent;
+        padding: 0;
+        border-radius: 0;
+        box-shadow: none;
         }
         
         .main-content {
-          grid-column: 2;                 /* center column */
-          width: 100%;
-          margin: 0;                      /* centered by column position */
-          padding: 0 1em;
+        grid-column: 2;                /* center column */
+        width: 100%;
+        margin: 0;                     /* centered by column position */
+        padding: 0 1em;
         }
         
         /* make TOC sticky */
         .sidebar-toc {
-          position: sticky;
-          top: 16px;
+        position: sticky;
+        top: 16px;
         }
         
         /* Responsive: collapse to one column */
         @media (max-width: 900px) {
-          .page {
-            grid-template-columns: minmax(0, 1fr);
-          }
-          .sidebar-toc, .main-content {
-            grid-column: 1;
-          }
-          .sidebar-toc {
-            order: -1;                    /* TOC above content on mobile */
-          }
+        .page {
+          grid-template-columns: minmax(0, 1fr);
+        }
+        .sidebar-toc, .main-content {
+          grid-column: 1;
+        }
+        .sidebar-toc {
+          order: -1;                   /* TOC above content on mobile */
+        }
+        }
+        
+        /* Brand + neutrals */
+        :root {
+        --accent: #004080;             /* site header blue */
+        --border: #e0e0e0;
+        --text: #333;
+        --card-bg: #fff;
+        --shadow: 0 0 10px rgba(0,0,0,0.1);
+        --radius: 8px;
+        --spacing: 16px;
+        }
+        
+        /* Card styling inside the sticky left rail */
+        .sidebar-toc .toc-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: var(--spacing);
+        font-family: Arial, sans-serif;
+        color: var(--text);
+        line-height: 1.6;
+        }
+        
+        /* Heading styles to match section headings */
+        .sidebar-toc .toc-card h3 {
+        margin: 0 0 8px;
+        font-size: 1rem;
+        color: var(--accent);
+        border-bottom: 2px solid var(--accent);
+        padding-bottom: 6px;
+        }
+        
+        /* List reset and spacing */
+        .sidebar-toc .toc-card ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        }
+        .sidebar-toc .toc-card li + li {
+        margin-top: 8px;
+        }
+        
+        /* Nested sublists */
+        .sidebar-toc .toc-card ul ul {
+        margin-left: 1em;
+        margin-top: 0.25em;
+        }
+        .sidebar-toc .toc-card ul ul li {
+        font-size: 0.95em;
+        }
+        
+        /* Links: default + hover to brand blue */
+        .sidebar-toc .toc-card a {
+        text-decoration: none;
+        color: var(--text);
+        }
+        .sidebar-toc .toc-card a:hover,
+        .sidebar-toc .toc-card a:focus {
+        color: var(--accent);
+        text-decoration: underline;
+        }
+        
+        /* Keep anchor targets visible below sticky header/nav if you jump */
+        section[id] {
+        scroll-margin-top: 24px; /* tweak if your header is taller */
+        }
+
+        /* smooth scroll */
+        html {
+        scroll-behavior: smooth;
         }
     </style>
 </head>
@@ -67,10 +139,10 @@
     </header>
 
 
-    <div class="layout">
-      <aside id="toc" aria-label="Table of Contents">
+    <div class="page">
+      <aside id="toc" class="sidebar-toc" aria-label="Table of Contents">
         <!-- Sidebar Table of Contents-->
-        <div class="sidebar-toc">
+        <div class="toc-card">
             <h3>Table of Contents</h3>
             <ul>
                 <li><a href="#capstone">Capstone Project</a></li>
@@ -97,7 +169,9 @@
             </ul>
         </div>
       </aside>
-      <main class="main-content">
+        
+      <!-- Center column: your main content -->
+      <main class="main-content" id="content">
         <!-- Centered Main Content -->
         <div class="main-content">
     
