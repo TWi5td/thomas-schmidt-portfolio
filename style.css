@@ -117,10 +117,10 @@ footer a:hover {
 
 /* ---- Layout variables (zoom-friendly, rem-based) ---- */
 :root {
-  --rail-width: 18rem;            /* left rail width (~288px @ 16px base) */
-  --page-gap: 1.25rem;
+  --rail-width: clamp(14rem, 18vw, 18rem);            /* left rail width (~288px @ 16px base) */
+  --page-gap: clamp(0.75rem, 2vw, 2rem);
   --sticky-top: 1rem;
-  --section-max: clamp(36rem, 60ch, 72rem); /* fluid bounded main width */
+  --section-max: min(90vw, 80rem); /* fluid bounded main width */
 }
 
 /* ---- Three-column grid: LEFT rail | MAIN | EMPTY RIGHT ---- */
