@@ -39,15 +39,15 @@ nav {
 }
 
 /* page links */
-nav a:link,
-nav a:visited,
-nav a:active,
-nav a:focus {
+nav.top-links a:link,
+nav.top-links a:visited,
+nav.top-links a:active,
+nav.top-links a:focus {
   color: white;
   text-decoration: none;
 }
 
-nav a:hover {
+nav.top-links a:hover {
   text-decoration: underline;
 }
 
@@ -177,24 +177,15 @@ html, body, .layout { overflow: visible; }
 }
 
 /* toc links */
-toc a:link{
-  color: blue;
-  text-decoration: none;
-}
-toc a:visited{
-  color: blue;
-  text-decoration: none;
-}
-toc a:active{
-  color: blue;
-  text-decoration: none;
-}
-toc a:focus {
+.toc a:link,
+.toc a:visited,
+.toc a:active,
+.toc a:focus {
   color: blue;
   text-decoration: none;
 }
 
-nav a:hover {
+.toc a:hover {
   text-decoration: underline;
 }
 
