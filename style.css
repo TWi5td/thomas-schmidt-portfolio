@@ -174,10 +174,10 @@ html, body, .layout { overflow: visible; }
 }
 
 /* Indent child lists */
-.toc ul ul {
-  padding-left: 1rem;
-  border-left: 2px solid #e5eaf2;  /* subtle vertical guide */
-  margin-left: 0.5rem;
+.toc li > ul {
+  margin-left: 1rem;
+  padding-left: 0.75rem;          /* spacing between border and text */
+  border-left: 2px solid #e5eaf2; /* subtle vertical guide */
 }
 
 /* Item spacing */
