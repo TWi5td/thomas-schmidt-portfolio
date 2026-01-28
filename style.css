@@ -54,6 +54,20 @@ nav {
   text-decoration: none;
 }
 
+.school-links a{
+  color: white;
+  text-decoration: none;
+}
+
+.school-links a:hover {
+  text-decoration: underline;
+}
+
+.school-links a:focus-visible{
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+  text-decoration: none;
+}
 
 /* Generic section styling */
 section {
