@@ -58,7 +58,7 @@ nav {
   color: white;
   text-decoration: none;
   margin: 0.5em 0;
-  font-size: 2.0em;
+  font-size: 2.0em !important;
 }
 
 .school-links a:hover {
