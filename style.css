@@ -73,7 +73,7 @@ nav {
   text-decoration: none;
 }
 
-/* Generic section styling */
+/* section styling */
 section {
   max-width: 800px;
   margin: 2em auto;
@@ -116,7 +116,7 @@ footer a:hover {
   text-decoration: underline;
 }
 
-/* Responsive Design */
+/* responsive links */
 @media (max-width: 600px) {
   header h1 {
     font-size: 2em;
@@ -133,9 +133,9 @@ footer a:hover {
 
 
 
-/* ---- Layout variables (zoom-friendly, rem-based) ---- */
+/* ---- Layout variables ---- */
 :root {
-  --rail-width: clamp(14rem, 18vw, 18rem);            /* left rail width (~288px @ 16px base) */
+  --rail-width: clamp(14rem, 18vw, 18rem);            /* left rail width */
   --page-gap: clamp(0.75rem, 2vw, 2rem);
   --sticky-top: 1rem;
   --section-max: min(90vw, 80rem); /* fluid bounded main width */
@@ -150,11 +150,11 @@ footer a:hover {
   align-items: start;
 }
 
-/* Place items explicitly so column 3 remains empty spacing */
+/* place items explicitly so column 3 remains empty spacing */
 .layout > .rail { grid-column: 1; }
 .layout > main   { grid-column: 2; }
 
-/* Ensure no ancestor overflow interferes with sticky behavior */
+/* ensure no ancestor overflow interferes with sticky behavior */
 html, body, .layout { overflow: visible; }
 
 /* ---- Sticky left rail ---- */
@@ -218,7 +218,7 @@ html, body, .layout { overflow: visible; }
 /* ---- Main column ---- */
 main { min-width: 0; }
 
-/* zoom-friendly max width */
+/* zoom max width */
 section {
   max-width: var(--section-max);
   margin: 2rem auto;
@@ -227,7 +227,7 @@ section {
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-/* Typography respects zoom */
+/* typography respects zoom */
 h1, h2, h3 { line-height: 1.2; }
 p, li { font-size: 1rem; }
 
@@ -243,13 +243,13 @@ section * {
   overflow: auto;
 }
 
-/* ---- Responsive: collapse to one column on narrow screens or extreme zoom ---- */
+/* ---- collapse to one column on narrow screens or extreme zoom ---- */
 @media (max-width: 64rem) {
   .layout {
     grid-column: 2 / span 2;
   }
   .rail {
-    position: static; /* or keep sticky if you prefer */
+    position: static;
     margin-bottom: var(--page-gap);
   }
 }
