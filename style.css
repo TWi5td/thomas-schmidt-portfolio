@@ -10,6 +10,8 @@ body {
 }
 
 header {
+  
+  background: linear-gradient(90deg, #004e9a, #00a3e0);
   background-color: #004080; /* Professional dark blue */
   color: white;
   text-align: center;
