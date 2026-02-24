@@ -54,7 +54,7 @@
       // disallow protocol and attempts to traverse outside
       if (!p) return null;
       if (/^https?:/i.test(p)) return null;        // no absolute URLs
-      if (p.includes("..")) return null;           // no parent traversal
+      //if (p.includes("..")) return null;           // no parent traversal
       return p;
     }
 
