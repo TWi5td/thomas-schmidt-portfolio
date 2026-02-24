@@ -95,17 +95,11 @@
 
     // ---- DOCX PREVIEW ----
     if (isDocx(safeSrc)) {
-      frame.style.display = "none"; // hide iframe
-
-      fallback.innerHTML = `
-        <p>This document type cannot be previewed in the browser.</p>
-        <p>
-          <a href="${safeSrc}" download>Download ${displayTitle}</a>
-          &nbsp;|&nbsp;
-          <a href="${safeSrc}" target="_blank">Open in new tab</a>
-        </p>
-      `;
-      return;
+        frame.src =
+          "https://docs.google.com/gview?url=" +
+          location.origin + safeSrc +
+          "&embedded=true";
+        return;
     }
 
     // ---- UNKNOWN FILE TYPE ----
