@@ -6,7 +6,6 @@
     <title>Thomas Schmidt – Eagle Scout Project Gallery</title>
     <link rel="stylesheet" href="../style.css">
     <style>
-        /* Minimal gallery styling – blends with your existing CSS */
         .content {
             max-width: 1100px;
             margin: 0 auto;
@@ -65,15 +64,14 @@
     </main>
 
     <script>
-        // Base path: repo root → assets/eagle_gallery/, and this page is in a subfolder
+        // Base path: repo root → assets/eagle_gallery/
         const BASE = "../assets/eagle_gallery/";
         const MANIFEST = BASE + "manifest.json";
 
-        // Helper: make a human-ish caption from a filename
         function captionFrom(name) {
             // Drop extension
             let base = name.replace(/\.[^/.]+$/, "");
-            // Handle camera timestamp-style names (e.g., 20190907_105753)
+            // Handle camera timestamp
             base = base.replace(/_/g, " ");
             return base;
         }
@@ -91,7 +89,7 @@
             video.controls = true;
             video.preload = "metadata";
             video.title = alt;
-            // For a poster frame you can add: video.poster = BASE + "thumbs/" + src.replace(/\.[^/.]+$/, ".jpg");
+            
             const source = document.createElement("source");
             source.src = src;
             source.type = "video/mp4";
@@ -103,10 +101,10 @@
             const fig = document.createElement("figure");
             fig.setAttribute("role", "listitem");
             fig.appendChild(node);
-            const cap = document.createElement("figcaption");
+            //const cap = document.createElement("figcaption");
             //cap.textContent = captionFrom(name);
             //fig.appendChild(cap);
-            //container.appendChild(fig);
+            container.appendChild(fig);
         }
 
         (async function init() {
@@ -122,7 +120,7 @@
                 const images = Array.isArray(data.images) ? data.images : [];
                 const videos = Array.isArray(data.videos) ? data.videos : [];
 
-                // Combine as a single stream but keep images first (optional)
+                // Combine as a single stream but keep images first
                 images.forEach(name => {
                     const img = createImage(BASE + name, name);
                     addFigure(gallery, img, name);
