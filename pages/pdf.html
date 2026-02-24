@@ -1,1 +1,91 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Thomas Schmidt – Document Viewer</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .content { max-width: 1100px; margin: 0 auto; padding: 16px; }
+    .pdf-wrap { border-radius: 8px; overflow: hidden; background: #fff; }
+    .pdf-embed { width: 100%; height: 80vh; border: 0; }
+    .hint { color:#666; font-size:.9rem; margin-top: 10px; }
+    @media (max-width: 640px) {
+      .pdf-embed { height: 75vh; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Thomas Schmidt</h1>
+    <nav class="school-links">
+      <a href="diploma.html">B.S. Computer Engineering | University of Idaho | Graduated December 2025</a>
+    </nav>
+    <nav class="top-links">
+      <a href="../index.html">Home</a> |
+      <a href="resume.html">Resume</a> |
+      <a href="sample_work.html">Sample Work</a> |
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main class="content">
+    <h2 id="doc-title">Document</h2>
+
+    <div class="pdf-wrap">
+      <iframe id="pdfFrame" class="pdf-embed" title="PDF viewer"></iframe>
+    </div>
+
+    <p class="hint" id="fallback" aria-live="polite"></p>
+  </main>
+
+  <script>
+    // Read query parameters: ?src=../assets/pdf_gallery/file.pdf[&title=Custom%20Title]
+    const params = new URLSearchParams(location.search);
+    const srcParam = params.get("src");
+    const customTitle = params.get("title");
+
+    const frame = document.getElementById("pdfFrame");
+    const fallback = document.getElementById("fallback");
+    const titleEl = document.getElementById("doc-title");
+
+    function sanitizeRelativePath(p) {
+      // disallow protocol and attempts to traverse outside
+      if (!p) return null;
+      if (/^https?:/i.test(p)) return null;        // no absolute URLs
+      if (p.includes("..")) return null;           // no parent traversal
+      return p;
+    }
+
+    function makeNiceTitle(path) {
+      const name = path.split("/").pop() || "Document";
+      return name.replace(/\.[^/.]+$/, "").replace(/[_-]+/g, " ");
+    }
+
+    (function init() {
+      const safeSrc = sanitizeRelativePath(srcParam);
+      if (!safeSrc) {
+        fallback.textContent = "No PDF specified or the path is not allowed. Use ?src=assets/pdf_gallery/yourfile.pdf";
+        return;
+      }
+
+      // Title: use ?title=... if provided, else derive from filename
+      const pageTitle = customTitle ? customTitle : makeNiceTitle(safeSrc);
+      titleEl.textContent = pageTitle;
+
+      // Embed the PDF. Hash options are hints; support varies by browser/PDF viewer.
+      frame.src = safeSrc + "#view=FitH&toolbar=1&navpanes=0";
+
+      // Fallback link if the PDF viewer doesn't render
+      const a = document.createElement("a");
+      a.href = safeSrc;
+      a.target = "_blank";
+      a.rel = "noopener";
+      a.textContent = "Open this PDF in a new tab";
+      fallback.innerHTML = "";
+      fallback.appendChild(a);
+    })();
+  </script>
+</body>
+</html>
