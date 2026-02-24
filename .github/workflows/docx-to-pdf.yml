@@ -1,0 +1,54 @@
+name: Convert DOCX to PDF
+
+on:
+  push:
+    paths:
+      - 'assets/**/*.docx'   # Only run when DOCX in /assets changes
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install LibreOffice
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libreoffice
+
+      - name: Convert DOCX to PDF
+        shell: bash
+        run: |
+          shopt -s globstar nullglob
+          changed_docs=()
+          # Convert only DOCX that changed in this push (fallback: convert all under assets)
+          if [[ -n "${{ github.event.before }}" ]]; then
+            mapfile -t changed_docs < <(git diff --name-only ${{ github.event.before }} ${{ github.sha }} -- 'assets/**/*.docx')
+          fi
+          if (( ${#changed_docs[@]} == 0 )); then
+            mapfile -t changed_docs < <(printf '%s\n' assets/**/*.docx)
+          fi
+          echo "DOCX files to convert:"
+          printf ' - %s\n' "${changed_docs[@]}"
+
+          for docx in "${changed_docs[@]}"; do
+            dir="$(dirname "$docx")"
+            echo "Converting $docx → PDF in $dir"
+            soffice --headless --convert-to pdf --outdir "$dir" "$docx"
+          done
+
+      - name: Commit PDFs (if any)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if ! git diff --quiet; then
+            git add assets/**/*.pdf
+            git commit -m "chore: auto-convert DOCX to PDF [skip ci]"
+            git push
+          else
+            echo "No changes to commit."
+          fi
