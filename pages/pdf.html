@@ -40,52 +40,81 @@
     <p class="hint" id="fallback" aria-live="polite"></p>
   </main>
 
-  <script>
-    // Read query parameters: ?src=../assets/pdf_gallery/file.pdf[&title=Custom%20Title]
-    const params = new URLSearchParams(location.search);
-    const srcParam = params.get("src");
-    const customTitle = params.get("title");
+<script>
+  const params = new URLSearchParams(location.search);
+  const srcParam = params.get("src");
+  const customTitle = params.get("title");
 
-    const frame = document.getElementById("pdfFrame");
-    const fallback = document.getElementById("fallback");
-    const titleEl = document.getElementById("doc-title");
+  const frame = document.getElementById("pdfFrame");
+  const fallback = document.getElementById("fallback");
+  const titleEl = document.getElementById("doc-title");
 
-    function sanitizeRelativePath(p) {
-      // disallow protocol and attempts to traverse outside
-      if (!p) return null;
-      if (/^https?:/i.test(p)) return null;        // no absolute URLs
-      //if (p.includes("..")) return null;           // no parent traversal
-      return p;
+  function sanitizePath(p) {
+    if (!p) return null;
+    if (/^https?:/i.test(p)) return null;
+    return p;
+  }
+
+  function niceTitle(filename) {
+    return filename
+      .replace(/\.[^/.]+$/, "")
+      .replace(/[_-]+/g, " ");
+  }
+
+  function isPDF(path) {
+    return path.toLowerCase().endsWith(".pdf");
+  }
+
+  function isDocx(path) {
+    return path.toLowerCase().endsWith(".docx") ||
+           path.toLowerCase().endsWith(".doc");
+  }
+
+  (function init() {
+    const safeSrc = sanitizePath(srcParam);
+
+    if (!safeSrc) {
+      fallback.textContent = "No file specified. Use ?src=/assets/filename.pdf";
+      return;
     }
 
-    function makeNiceTitle(path) {
-      const name = path.split("/").pop() || "Document";
-      return name.replace(/\.[^/.]+$/, "").replace(/[_-]+/g, " ");
-    }
+    const displayTitle = customTitle ? customTitle : niceTitle(safeSrc);
+    titleEl.textContent = displayTitle;
 
-    (function init() {
-      const safeSrc = sanitizeRelativePath(srcParam);
-      if (!safeSrc) {
-        fallback.textContent = "No PDF specified or the path is not allowed. Use ?src=assets/pdf_gallery/yourfile.pdf";
-        return;
-      }
-
-      // Title: use ?title=... if provided, else derive from filename
-      const pageTitle = customTitle ? customTitle : makeNiceTitle(safeSrc);
-      titleEl.textContent = pageTitle;
-
-      // Embed the PDF. Hash options are hints; support varies by browser/PDF viewer.
+    // ---- PDF PREVIEW ----
+    if (isPDF(safeSrc)) {
       frame.src = safeSrc + "#view=FitH&toolbar=1&navpanes=0";
 
-      // Fallback link if the PDF viewer doesn't render
       const a = document.createElement("a");
       a.href = safeSrc;
       a.target = "_blank";
-      a.rel = "noopener";
-      a.textContent = "Open this PDF in a new tab";
-      fallback.innerHTML = "";
+      a.textContent = "Open in new tab";
       fallback.appendChild(a);
-    })();
-  </script>
+      return;
+    }
+
+    // ---- DOCX PREVIEW ----
+    if (isDocx(safeSrc)) {
+      frame.style.display = "none"; // hide iframe
+
+      fallback.innerHTML = `
+        <p>This document type cannot be previewed in the browser.</p>
+        <p>
+          <a href="${safeSrc}" download>Download ${displayTitle}</a>
+          &nbsp;|&nbsp;
+          <a href="${safeSrc}" target="_blank">Open in new tab</a>
+        </p>
+      `;
+      return;
+    }
+
+    // ---- UNKNOWN FILE TYPE ----
+    frame.style.display = "none";
+    fallback.innerHTML = `
+      <p>Preview not supported for this file type.</p>
+      <p><a href="${safeSrc}" download>Download file</a></p>
+    `;
+  })();
+</script>
 </body>
 </html>
