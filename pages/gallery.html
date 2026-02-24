@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thomas Schmidt – Eagle Scout Project Gallery</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        /* Minimal gallery styling – blends with your existing CSS */
+        .content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 16px;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 14px;
+        }
+        figure {
+            margin: 0;
+        }
+        .gallery-grid img,
+        .gallery-grid video {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+            border-radius: 8px;
+            background: #eee;
+        }
+        figcaption {
+            font-size: 0.9rem;
+            color: #555;
+            margin-top: 6px;
+            word-break: break-word;
+        }
+        .hint {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Thomas Schmidt</h1>
+        <nav class="school-links">
+            <a href="../assets/UofI_diploma.jpg">B.S. Computer Engineering | University of Idaho | Graduated December 2025</a>
+        </nav>
+        <nav class="top-links">
+            <a href="../index.html">Home</a> |
+            <a href="resume.html">Resume</a> |
+            <a href="sample_work.html">Sample Work</a> |
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <main class="content">
+        <h2>Eagle Scout Project – Finucane Announcers Box</h2>
+        <p class="hint">Photos and video from the build (September 2019).</p>
+
+        <div id="gallery" class="gallery-grid" role="list"></div>
+        <p id="status" class="hint" aria-live="polite"></p>
+    </main>
+
+    <script>
+        // Base path: repo root → assets/eagle_gallery/, and this page is in a subfolder
+        const BASE = "../assets/eagle_gallery/";
+        const MANIFEST = BASE + "manifest.json";
+
+        // Helper: make a human-ish caption from a filename
+        function captionFrom(name) {
+            // Drop extension
+            let base = name.replace(/\.[^/.]+$/, "");
+            // Handle camera timestamp-style names (e.g., 20190907_105753)
+            base = base.replace(/_/g, " ");
+            return base;
+        }
+
+        function createImage(src, alt) {
+            const img = document.createElement("img");
+            img.src = src;
+            img.alt = alt;
+            img.loading = "lazy";
+            return img;
+        }
+
+        function createVideo(src, alt) {
+            const video = document.createElement("video");
+            video.controls = true;
+            video.preload = "metadata";
+            video.title = alt;
+            // For a poster frame you can add: video.poster = BASE + "thumbs/" + src.replace(/\.[^/.]+$/, ".jpg");
+            const source = document.createElement("source");
+            source.src = src;
+            source.type = "video/mp4";
+            video.appendChild(source);
+            return video;
+        }
+
+        function addFigure(container, node, name) {
+            const fig = document.createElement("figure");
+            fig.setAttribute("role", "listitem");
+            fig.appendChild(node);
+            const cap = document.createElement("figcaption");
+            cap.textContent = captionFrom(name);
+            fig.appendChild(cap);
+            container.appendChild(fig);
+        }
+
+        (async function init() {
+            const gallery = document.getElementById("gallery");
+            const status = document.getElementById("status");
+
+            try {
+                status.textContent = "Loading gallery…";
+                const res = await fetch(MANIFEST, { cache: "no-cache" });
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                const data = await res.json();
+
+                const images = Array.isArray(data.images) ? data.images : [];
+                const videos = Array.isArray(data.videos) ? data.videos : [];
+
+                // Combine as a single stream but keep images first (optional)
+                images.forEach(name => {
+                    const img = createImage(BASE + name, name);
+                    addFigure(gallery, img, name);
+                });
+                videos.forEach(name => {
+                    const vid = createVideo(BASE + name, name);
+                    addFigure(gallery, vid, name);
+                });
+
+                status.textContent = images.length + videos.length
+                    ? `Loaded ${images.length} photos and ${videos.length} video${videos.length === 1 ? "" : "s"}.`
+                    : "No media found in the gallery.";
+            } catch (err) {
+                console.error("Failed to load gallery:", err);
+                status.textContent = "Sorry—could not load the gallery.";
+            }
+        })();
+    </script>
+</body>
+</html>
