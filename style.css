@@ -17,7 +17,7 @@ header {
   background-color: #004080; /* Professional dark blue */
   color: white;
   text-align: center;
-  padding: 2em 0;
+  padding: 1em 0;
 }
 
 header h1 {
@@ -141,7 +141,8 @@ footer a:hover {
   --page-gap: clamp(0.75rem, 2vw, 2rem);
   --sticky-top: 1rem;
   --section-max: min(90vw, 80rem); /* fluid bounded main width */
-  --header-height: calc(2em + <line-heights>); /*clamp(64px, 10vh, 120px);*?
+  --header-height: clamp(72px, 12vh, 128px);
+  /*--header-height: calc(2em + <line-heights>);*/
 
 }
 
@@ -164,7 +165,7 @@ html, body, .layout { overflow: visible; }
 /* ---- Sticky left rail ---- */
 .rail {
   position: sticky;
-  top: var(--sticky-top);
+  top: calc(var(--header-height) + var(--sticky-top);
   align-self: start;
   z-index: 10;
 }
