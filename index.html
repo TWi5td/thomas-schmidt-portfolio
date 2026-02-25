@@ -10,20 +10,35 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>Thomas Schmidt</h1>
-        <nav class="school-links">
-            <a href="pages/diploma.html">B.S. Computer Engineering | University of Idaho | Graduated December 2025</a>
-        </nav>
-        <nav class="top-links">
-            <a href="index.html">Home</a> |
-            <a href="pages/resume.html">Resume</a> |
-            <!-- a href="projects.html">Projects</a> |
-            <a href="samples.html">Sample Work</a> | -->
-            <a href="pages/sample_work.html">Sample Work</a> |
-            <a href="pages/contact.html">Contact</a>
-        </nav>
-    </header>
+    <header class="site-header" role="banner">
+        <div class="container header-inner">
+            <!-- Brand / Home -->
+            index.html
+            Thomas Schmidt
+            </a>
+        
+            <!-- Primary nav (desktop + mobile) -->
+            <nav class="site-nav" role="navigation" aria-label="Primary">
+                <button class="nav-toggle" aria-expanded="false" aria-controls="primary-menu">
+                    <span class="sr-only">Toggle menu</span>
+                    ☰
+                </button>
+        
+                <ul id="primary-menu" class="menu">
+                    <li><a href="index.html">About</a></li>
+                    <li><a href="pages/sample_work.html">Writing</a></li>
+                    <li><a href="pages/resume.html">Résumé</a></li>
+                    <li><a href="pages/contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    
+        <div class="container school-ribbon">
+            <a class="school-link" href="pages/diploma.html">
+                B.S. Computer Engineering — University of Idaho — Graduated December 2025
+            </a>
+        </div>
+    </header>    
 
     <section class="welcome">
         <h2>Welcome to My Portfolio</h2>
@@ -48,5 +63,37 @@
         <p>Contact: <a href="mailto:twschmidt2001@gmail.com">twschmidt2001@gmail.com</a> | (208) 660-0234 | <a href="https://www.linkedin.com/in/thomaschmidt">LinkedIn</a> | <a href="https://github.com/TWi5td">GitHub</a></p>
         <p>&copy; 2025 Thomas Schmidt. All rights reserved.</p>
     </footer>
+
+    <script>
+        // Highlight current page link based on file name
+        (function () {
+            const path = location.pathname.split('/').pop() || 'index.html';
+            const current = document.querySelector(`.menu a[href$="${path}"]`);
+            if (current) current.classList.add('is-active');
+        })();
+        
+        // Mobile menu toggling
+        (function () {
+                const toggle = document.querySelector('.nav-toggle');
+                const menu = document.getElementById('primary-menu');
+                if (!toggle || !menu) return;
+            
+                toggle.addEventListener('click', () => {
+                    const open = menu.classList.toggle('open');
+                    toggle.setAttribute('aria-expanded', String(open));
+                });
+            
+            // Close when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!menu.contains(e.target) && !toggle.contains(e.target)) {
+                    if (menu.classList.contains('open')) {
+                        menu.classList.remove('open');
+                        toggle.setAttribute('aria-expanded', 'false');
+                    }
+                }
+            });
+        })();
+    </script>
+    
 </body>
 </html>
