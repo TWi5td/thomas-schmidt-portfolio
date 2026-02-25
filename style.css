@@ -141,6 +141,8 @@ footer a:hover {
   --page-gap: clamp(0.75rem, 2vw, 2rem);
   --sticky-top: 1rem;
   --section-max: min(90vw, 80rem); /* fluid bounded main width */
+  --header-height: clamp(64px, 10vh, 120px);
+
 }
 
 /* ---- Three-column grid: LEFT rail | MAIN | EMPTY RIGHT ---- */
