@@ -10,14 +10,12 @@ body {
 }
 
 header {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+  
   /*background: linear-gradient(90deg, #004e9a, #00a3e0);*/
   background-color: #004080; /* Professional dark blue */
   color: white;
   text-align: center;
-  padding: 1em 0;
+  padding: 2em 0;
 }
 
 header h1 {
@@ -141,9 +139,6 @@ footer a:hover {
   --page-gap: clamp(0.75rem, 2vw, 2rem);
   --sticky-top: 1rem;
   --section-max: min(90vw, 80rem); /* fluid bounded main width */
-  --header-height: clamp(72px, 12vh, 128px);
-  /*--header-height: calc(2em + <line-heights>);*/
-
 }
 
 /* ---- Three-column grid: LEFT rail | MAIN | EMPTY RIGHT ---- */
@@ -165,7 +160,7 @@ html, body, .layout { overflow: visible; }
 /* ---- Sticky left rail ---- */
 .rail {
   position: sticky;
-  top: calc(var(--header-height) + var(--sticky-top);
+  top: var(--sticky-top);
   align-self: start;
   z-index: 10;
 }
@@ -257,15 +252,4 @@ section * {
     position: static;
     margin-bottom: var(--page-gap);
   }
-}
-
-
-/* ensure sections never slide under the sticky header when using #anchors */
-html{
-  scroll-padding-top: var(--header-height);
-}
-
-/* Smooth scrolling for nicer anchor jumps */
-html{
-  scroll-behavior: smooth;
 }
