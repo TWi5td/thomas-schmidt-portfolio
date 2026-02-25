@@ -381,3 +381,6 @@ body { padding-top: var(--h-header); }
   .menu.open { display: flex; }
   .menu a { padding: .6rem .75rem; }
 }
+
+
+html { scroll-behavior: smooth; }
