@@ -10,7 +10,9 @@ body {
 }
 
 header {
-  
+  position: sticky;
+  top: 0;
+  z-index: 1000;
   /*background: linear-gradient(90deg, #004e9a, #00a3e0);*/
   background-color: #004080; /* Professional dark blue */
   color: white;
@@ -252,5 +254,16 @@ section * {
     position: static;
     margin-bottom: var(--page-gap);
   }
+}
+
+
+/* ensure sections never slide under the sticky header when using #anchors */
+html{
+  scroll-padding-top: var(--header-height);
+}
+
+/* Smooth scrolling for nicer anchor jumps */
+html{
+  scroll-behavior: smooth;
 }
 
