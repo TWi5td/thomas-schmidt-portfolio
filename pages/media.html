@@ -1,0 +1,286 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Thomas Schmidt – Media</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .content { max-width: 1100px; margin: 0 auto; padding: 16px; }
+    .back-bar { margin: 8px 0 12px; display: flex; align-items: center; }
+    .back-btn {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .45rem .7rem; border: 1px solid #d1d5db; background: #fff;
+      color: #111827; border-radius: 6px; text-decoration: none; font-size: .95rem;
+      transition: background .15s ease-in-out, border-color .15s ease-in-out;
+    }
+    .back-btn:hover { background: #f3f4f6; border-color: #c7cad1; }
+
+    /* Viewer blocks */
+    .pdf-wrap { border-radius: 8px; overflow: hidden; background: #fff; }
+    .pdf-embed { width: 100%; height: 80vh; border: 0; }
+    @media (max-width: 640px) { .pdf-embed { height: 75vh; } }
+    .single-photo, .single-video { margin-top: 12px; }
+    .single-photo img { max-width: 100%; height: auto; border-radius: 8px; display: block; }
+    .single-video video { width: 100%; max-height: 80vh; border-radius: 8px; display: block; }
+
+    /* Gallery (from eagle_gallery.html) */
+    .gallery-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px;
+    }
+    figure { margin: 0; }
+    .gallery-grid img, .gallery-grid video {
+      width: 100%; height: 200px; object-fit: cover; display: block; border-radius: 8px; background: #eee;
+    }
+
+    .hint { color:#666; font-size:.9rem; margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Thomas Schmidt</h1>
+    <nav class="school-links">
+      <a href="diploma.html">B.S. Computer Engineering | University of Idaho | Graduated December 2025</a>
+    </nav>
+    <nav class="top-links">
+      <a href="../index.html">About</a> |
+      <a href="resume.html">Resume</a> |
+      <a href="sample_work.html">Sample Work</a> |
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main class="content">
+    <!-- Back -->
+    <div class="back-bar">
+      <a id="backLink" href="#" class="back-btn" aria-label="Go back">← Back</a>
+    </div>
+
+    <h2 id="doc-title">Media</h2>
+
+    <!-- PDF/DOCX -->
+    <div id="pdfWrap" class="pdf-wrap" style="display:none;">
+      <iframe id="pdfFrame" class="pdf-embed" title="PDF viewer"></iframe>
+    </div>
+
+    <!-- Single image -->
+    <div id="imageWrap" class="single-photo" style="display:none;">
+      <img id="imageEl" src="" alt="">
+    </div>
+
+    <!-- Single video -->
+    <div id="videoWrap" class="single-video" style="display:none;">
+      <video id="videoEl" controls preload="metadata"></video>
+    </div>
+
+    <!-- Gallery -->
+    <section id="galleryWrap" style="display:none;">
+      <div id="gallery" class="gallery-grid" role="list"></div>
+    </section>
+
+    <!-- Fallback/status -->
+    <p class="hint" id="status" aria-live="polite"></p>
+  </main>
+
+<script>
+  // ---- Query params ----
+  // mode: pdf | doc | image | video | gallery | auto (default = auto)
+  // src: resource path (file or folder for gallery); title: heading; return: back target
+  const params     = new URLSearchParams(location.search);
+  const modeParam  = (params.get("mode") || "auto").toLowerCase();
+  const srcParam   = params.get("src");
+  const customTitle= params.get("title");
+  const returnTo   = params.get("return");
+
+  // ---- Elements ----
+  const backLink   = document.getElementById("backLink");
+  const titleEl    = document.getElementById("doc-title");
+  const statusEl   = document.getElementById("status");
+
+  const pdfWrap    = document.getElementById("pdfWrap");
+  const pdfFrame   = document.getElementById("pdfFrame");
+
+  const imageWrap  = document.getElementById("imageWrap");
+  const imageEl    = document.getElementById("imageEl");
+
+  const videoWrap  = document.getElementById("videoWrap");
+  const videoEl    = document.getElementById("videoEl");
+
+  const galleryWrap= document.getElementById("galleryWrap");
+  const galleryEl  = document.getElementById("gallery");
+
+  // ---- Back behavior ----
+  if (backLink) {
+    backLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (returnTo) location.href = returnTo;
+      else if (history.length > 1) history.back();
+      else location.href = "sample_work.html";
+    });
+  }
+
+  // ---- Helpers reused ----
+  function niceTitle(path) {
+    const name = (path.split("/").pop() || "Document");
+    return name.replace(/\.[^/.]+$/, "").replace(/[_-]+/g, " ");
+  }
+  function isPDF(p)  { return /\.pdf$/i.test(p); }
+  function isDOC(p)  { return /\.(docx|doc)$/i.test(p); }
+  function isImage(p){ return /\.(png|jpe?g|gif|webp|avif|svg)$/i.test(p); }
+  function isVideo(p){ return /\.(mp4|webm|ogg|mov|m4v)$/i.test(p); }
+
+  async function urlExists(url) {
+    try {
+      const res = await fetch(url, { method: "HEAD", cache: "no-cache" });
+      return res.ok;
+    } catch {
+      return false;
+    }
+  }
+
+  // Gallery helpers (from eagle_gallery.html)
+  function createImage(src, alt) {
+    const img = document.createElement("img");
+    img.src = src; img.alt = alt; img.loading = "lazy";
+    return img;
+  }
+  function createVideo(src, alt) {
+    const video = document.createElement("video");
+    video.controls = true; video.preload = "metadata"; video.title = alt;
+    const source = document.createElement("source");
+    source.src = src; source.type = "video/mp4";
+    video.appendChild(source);
+    return video;
+  }
+  function addFigure(container, node) {
+    const fig = document.createElement("figure");
+    fig.setAttribute("role", "listitem");
+    fig.appendChild(node);
+    container.appendChild(fig);
+  }
+
+  // ---- Renderers ----
+  async function renderPDFLike(path) {
+    pdfWrap.style.display = "";
+    if (isPDF(path)) {
+      pdfFrame.src = path + "#view=FitH&toolbar=1&navpanes=0";
+      linkInStatus(path, "Open in new tab");
+      return true;
+    }
+    if (isDOC(path)) {
+      const pdfSibling = path.replace(/\.(docx|doc)$/i, ".pdf");
+      if (await urlExists(pdfSibling)) {
+        pdfFrame.src = pdfSibling + "#view=FitH&toolbar=1&navpanes=0";
+        linkInStatus(pdfSibling, "Open PDF in new tab");
+      } else {
+        // Fall back to download/open
+        pdfWrap.style.display = "none";
+        statusEl.innerHTML = `
+          <div style="padding:16px;background:#f6f7fb;border:1px solid #e6e7ee;border-radius:8px;margin-top:16px">
+            <p><strong>${customTitle || niceTitle(path)}</strong> cannot be previewed in this browser.</p>
+            <p>
+              <a href="${path}" download>Download</a> &nbsp;|&nbsp;
+              <a href="${path}" target="_blank" rel="noopener">Open in Word</a>
+            </p>
+          </div>`;
+      }
+      return true;
+    }
+    return false;
+  }
+
+  function renderImage(path) {
+    imageWrap.style.display = "";
+    imageEl.src = path;
+    imageEl.alt = customTitle || niceTitle(path);
+  }
+
+  function renderVideo(path) {
+    videoWrap.style.display = "";
+    // Build <source> dynamically
+    videoEl.innerHTML = "";
+    const source = document.createElement("source");
+    source.src = path;
+    source.type = guessMime(path);
+    videoEl.appendChild(source);
+  }
+
+  async function renderGallery(folder) {
+    // Expect a manifest.json next to folder
+    // If folder ends with '/', keep it; else add it.
+    const base = folder.endsWith("/") ? folder : folder + "/";
+    const manifest = base + "manifest.json";
+    galleryWrap.style.display = "";
+    statusEl.textContent = "Loading gallery…";
+    try {
+      const res = await fetch(manifest, { cache: "no-cache" });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      const images = Array.isArray(data.images) ? data.images : [];
+      const videos = Array.isArray(data.videos) ? data.videos : [];
+
+      images.forEach(name => addFigure(galleryEl, createImage(base + name, name)));
+      videos.forEach(name => addFigure(galleryEl, createVideo(base + name, name)));
+
+      statusEl.textContent = (images.length + videos.length)
+        ? `Loaded ${images.length} photos and ${videos.length} video${videos.length === 1 ? "" : "s"}.`
+        : "No media found in the gallery.";
+    } catch (err) {
+      console.error("Failed to load gallery:", err);
+      statusEl.textContent = "Sorry—could not load the gallery.";
+    }
+  }
+
+  function linkInStatus(href, text) {
+    const a = document.createElement("a");
+    a.href = href; a.target = "_blank"; a.rel = "noopener"; a.textContent = text;
+    statusEl.appendChild(a);
+  }
+
+  function guessMime(path) {
+    if (/\.mp4$/i.test(path)) return "video/mp4";
+    if (/\.webm$/i.test(path)) return "video/webm";
+    if (/\.ogg$/i.test(path)) return "video/ogg";
+    return "video/mp4";
+  }
+
+  // ---- Init ----
+  (async function init() {
+    if (srcParam) titleEl.textContent = customTitle || niceTitle(srcParam);
+    else if (customTitle) titleEl.textContent = customTitle;
+
+    if (!srcParam) {
+      statusEl.textContent = "No media specified. Use ?src=... (and optional &mode=pdf|doc|image|video|gallery).";
+      return;
+    }
+
+    const mode = modeParam;
+
+    // Explicit modes
+    if (mode === "pdf" || mode === "doc") {
+      await renderPDFLike(srcParam);
+      return;
+    }
+    if (mode === "image") { renderImage(srcParam); return; }
+    if (mode === "video") { renderVideo(srcParam); return; }
+    if (mode === "gallery") { await renderGallery(srcParam); return; }
+
+    // Auto mode: detect by extension or treat as gallery if it looks like a folder
+    if (isPDF(srcParam) || isDOC(srcParam)) { await renderPDFLike(srcParam); return; }
+    if (isImage(srcParam)) { renderImage(srcParam); return; }
+    if (isVideo(srcParam)) { renderVideo(srcParam); return; }
+
+    // If it ends with '/', assume gallery; otherwise try gallery first, then fall back
+    if (srcParam.endsWith("/")) { await renderGallery(srcParam); return; }
+    // Try gallery manifest existence check
+    try {
+      const manifestOK = await urlExists(srcParam.replace(/\/?$/, "/") + "manifest.json");
+      if (manifestOK) { await renderGallery(srcParam); return; }
+    } catch {}
+
+    statusEl.textContent = "Unsupported media type or missing manifest.";
+  })();
+</script>
+</body>
+</html>
