@@ -214,6 +214,32 @@ html, body, .layout { overflow: visible; }
 }
 
 
+.back-bar {
+  margin: 8px 0 12px;
+  display: flex;
+  align-items: center;
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .45rem .7rem;
+  border: 1px solid #d1d5db;     /* subtle gray */
+  background: #fff;
+  color: #111827;                 /* near-black */
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: background .15s ease-in-out, border-color .15s ease-in-out;
+}
+
+.back-btn:hover {
+  background: #f3f4f6;
+  border-color: #c7cad1;
+}
+
+
 
 /* ---- Main column ---- */
 main { min-width: 0; }
