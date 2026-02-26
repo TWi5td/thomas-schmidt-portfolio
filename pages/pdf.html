@@ -50,16 +50,6 @@
   const params = new URLSearchParams(location.search);
   const srcParam = params.get("src");     // e.g., /assets/file.docx or /assets/file.pdf
   const customTitle = params.get("title");
-
-  const frame = document.getElementById("pdfFrame");
-  const fallback = document.getElementById("fallback");
-  const titleEl = document.getElementById("doc-title");
-
-  
-<script>
-  const params = new URLSearchParams(location.search);
-  const srcParam = params.get("src");     // e.g., /assets/file.docx or /assets/file.pdf
-  const customTitle = params.get("title");
   const returnTo = params.get("return");  // <-- NEW: optional return destination
 
   const frame = document.getElementById("pdfFrame");
@@ -84,73 +74,6 @@
     });
   }
 
-  function niceTitle(path) {
-    const name = (path.split("/").pop() || "Document");
-    return name.replace(/\.[^/.]+$/, "").replace(/[_-]+/g, " ");
-  }
-  function isPDF(p)  { return /\.pdf$/i.test(p); }
-  function isDOCX(p) { return /\.(docx|doc)$/i.test(p); }
-
-  async function urlExists(url) {
-    try {
-      const res = await fetch(url, { method: "HEAD", cache: "no-cache" });
-      return res.ok;
-    } catch {
-      return false;
-    }
-  }
-
-  (async function init() {
-    if (!srcParam) {
-      fallback.textContent = "No file specified. Use ?src=/assets/yourfile.pdf";
-      return;
-    }
-
-    const displayTitle = customTitle || niceTitle(srcParam);
-    titleEl.textContent = displayTitle;
-
-    if (isPDF(srcParam)) {
-      frame.src = srcParam + "#view=FitH&toolbar=1&navpanes=0";
-      const a = document.createElement("a");
-      a.href = srcParam; a.target = "_blank"; a.rel = "noopener";
-      a.textContent = "Open in new tab";
-      fallback.appendChild(a);
-      return;
-    }
-
-    if (isDOCX(srcParam)) {
-      const pdfPath = srcParam.replace(/\.(docx|doc)$/i, ".pdf");
-
-      if (await urlExists(pdfPath)) {
-        frame.src = pdfPath + "#view=FitH&toolbar=1&navpanes=0";
-        const a = document.createElement("a");
-        a.href = pdfPath; a.target = "_blank"; a.rel = "noopener";
-        a.textContent = "Open PDF in new tab";
-        fallback.appendChild(a);
-        return;
-      }
-
-      frame.style.display = "none";
-      fallback.innerHTML = `
-        <div class="docx-message" style="
-          padding:16px;background:#f6f7fb;border:1px solid #e6e7ee;
-          border-radius:8px;margin-top:16px">
-          <p><strong>${displayTitle}</strong> cannot be previewed in this browser.</p>
-          <p>
-            <a href="${srcParam}" download>Download</a> &nbsp;|&nbsp;
-            <a href="${srcParam}" target="_blank" rel="noopener">Open in Word</a>
-          </p>
-        </div>
-      `;
-      return;
-    }
-
-    frame.style.display = "none";
-    fallback.innerHTML = `
-      <p>Preview not supported for this file type.</p>
-      <p><a href="${srcParam}" download>Download file</a></p>
-    `;
-  })();
 
   function niceTitle(path) {
     const name = (path.split("/").pop() || "Document");
