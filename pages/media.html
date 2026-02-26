@@ -120,7 +120,7 @@
     });
   }
 
-  // ---- Helpers reused from your pages ----
+  // ---- Helpers reused ----
   function niceTitle(path) {
     const name = (path.split("/").pop() || "Document");
     return name.replace(/\.[^/.]+$/, "").replace(/[_-]+/g, " ");
@@ -198,7 +198,7 @@
 
   function renderVideo(path) {
     videoWrap.style.display = "";
-    // Build <source> dynamically to keep it clean
+    // Build <source> dynamically
     videoEl.innerHTML = "";
     const source = document.createElement("source");
     source.src = path;
@@ -207,7 +207,7 @@
   }
 
   async function renderGallery(folder) {
-    // Expect a manifest.json next to folder (just like your eagle_gallery)
+    // Expect a manifest.json next to folder
     // If folder ends with '/', keep it; else add it.
     const base = folder.endsWith("/") ? folder : folder + "/";
     const manifest = base + "manifest.json";
