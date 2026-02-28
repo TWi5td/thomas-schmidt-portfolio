@@ -13,15 +13,16 @@ View the portfolio at: [https://TWi5td.github.io/thomas-schmidt-portfolio](https
 ## Contents
 
 This repository contains:
-- `index.html` – Home page with introduction
-- `resume.html` – Embedded resume (with personal contact info removed)
-- `samples.html` – Selected writing and technical work from ENGL 317 and engineering coursework
-- `assets/` – Folder for PDFs, images, and supporting documents
-- `style.css` – Optional styling for customization
+- `about.html` – Home page with introduction.
+- `resume.html` – Embedded resume
+- `sample_work.html` – Selected writing and technical work from engineering coursework and personal projects.
+- `media.html` - Displays, jpgs (in a gallery), pdf's, converts DOCX to pdf, in one page. Features a back button that returns to the previous page.
+- `assets/` – Folder for PDFs, images, and supporting documents.
+- `style.css` – Optional styling for customization.
 
 ## Privacy Notice
 
-To protect my personal information, this portfolio does not include my phone number or home address. A professional email and LinkedIn are provided for contact purposes.
+To protect my personal information, this portfolio does not include my home address. A professional phone number, email, and LinkedIn are provided for contact purposes.
 
 ---
 
