@@ -383,13 +383,13 @@ section * {
 
 
 
-/* --- Top-left fixed placement --- */
+/* --- Top-left fixed placement --- 
 .theme-toggle-fixed {
   position: absolute;
   top: 8px;
   left: 8px;
   z-index: 9999;
-}
+}*/
 
 /* --- Accessible screen-reader text --- */
 .sr-only {
