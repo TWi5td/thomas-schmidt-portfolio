@@ -10,12 +10,12 @@ body {
 }
 
 header {
-  
   /*background: linear-gradient(90deg, #004e9a, #00a3e0);*/
   background-color: var(--brand);
   color: var(--brand-contrast);
   text-align: center;
   padding: 2em 0;
+  position: relative
 }
 
 header h1 {
@@ -393,6 +393,8 @@ section * {
 /* --- Accessible screen-reader text --- */
 .sr-only {
   position: absolute;
+  top: 8px; 
+  left: 8px;
   width: 1px; height: 1px;
   padding: 0; margin: -1px;
   overflow: hidden; clip: rect(0,0,0,0);
