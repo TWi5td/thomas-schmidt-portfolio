@@ -306,6 +306,9 @@ html, body, .layout { overflow: visible; }
   padding: .4rem .7rem;
   border-radius: 8px;
   cursor: pointer;
+  top: 8px;
+  left: 8px;
+  z-index: 9999;
 }
 #theme-toggle:hover {
   background: color-mix(in srgb, var(--brand), white 10%);
@@ -380,16 +383,6 @@ section * {
     margin-bottom: var(--page-gap);
   }
 }
-
-
-
-/* --- Top-left fixed placement --- 
-.theme-toggle-fixed {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  z-index: 9999;
-}*/
 
 /* --- Accessible screen-reader text --- */
 .sr-only {
