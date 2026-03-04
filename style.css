@@ -22,11 +22,10 @@ header {
 
 .header-row {
   display: grid;
-  grid-template-columns: auto 1fr auto; /* left | center | right */
+  grid-template-columns: ax-content 1fr max-content; /* left | center | right */
   align-items: center;
   width: 100%;
   padding-inline: 0;                    /* no side padding */
-  gap: 0.75rem;
 }
 
 header h1 {
@@ -46,7 +45,7 @@ header h1 {
 .header-row .switch {
   grid-column: 1;
   justify-self: start; /* flush to left edge of header */
-  margin-left: 0;
+  margin-left: 8px;
 }
 
 header p {
