@@ -42,7 +42,7 @@ nav {
 
 /* page links */
 .top-links a{
-  color: white;
+  color: var(--link);
   text-decoration: none;
 }
 
@@ -57,7 +57,7 @@ nav {
 }
 
 .school-links a{
-  color: white;
+  color: var(--link);
   text-decoration: none;
   margin: 0.5em 0;
   font-size: 1.4em;
@@ -71,16 +71,6 @@ nav {
   outline: 2px solid currentColor;
   outline-offset: 2px;
   text-decoration: none;
-}
-
-/* section styling */
-section {
-  max-width: 800px;
-  margin: 2em auto;
-  padding: 1em;
-  background-color: var(--card);
-  box-shadow: var(--shadow);
-  border: 1px solid var(--border);
 }
 
 .welcome h2, .skills h2 {
@@ -184,8 +174,43 @@ footer a:hover {
 }
 
 /* manual overrides via JS toggle */
-:root.theme-light { color-scheme: light; }
-:root.theme-dark  { color-scheme: dark; }
+:root.theme-light {
+  color-scheme: light;
+  --bg: #f4f4f4;
+  --text: #333333;
+  --card: #ffffff;
+  --shadow: 0 0 10px rgba(0,0,0,0.1);
+
+  --brand: #004080;
+  --brand-contrast: #ffffff;
+
+  --link: #ffffff;
+  --link-muted: #add8e6;
+  --accent: #004080;
+  --chip: #e0e0e0;
+  --border: #d1d5db;
+  --toc-border: #e5eaf2;
+  --toc-link: #000000;
+}
+:root.theme-dark  {
+  color-scheme: dark;
+  --bg: #0b0f14;
+  --text: #e5e7eb;
+  --card: #0f172a;
+  --shadow: 0 0 10px rgba(0,0,0,0.35);
+
+  --brand: #0a2540;
+  --brand-contrast: #e5e7eb;
+
+  --link: #c7e0ff;
+  --link-muted: #9cc6ff;
+  --accent: #93c5fd;
+  --chip: #1f2937;
+  --border: #374151;
+  --toc-border: #253043;
+  --toc-link: #dbeafe;
+
+}
 
 img.on-dark-adjust {
   filter: brightness(1.05) contrast(1.05);
@@ -217,16 +242,18 @@ html, body, .layout { overflow: visible; }
 }
 
 .card {
-  background: #004080; /* dark bllue */
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid var(--border);
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  box-shadow: var(--shadow);
   padding: 1rem;
 }
 
 /* TOC styles */
 .toc h4 {
   margin: 0 0 .75rem;
-  color: #004080;
+  color: var(--accent);
 }
 
 /* Remove bullets but create indentation */
@@ -291,13 +318,14 @@ html, body, .layout { overflow: visible; }
 }
 
 .back-btn {
+
   display: inline-flex;
   align-items: center;
   gap: .5rem;
   padding: .45rem .7rem;
-  border: 1px solid #d1d5db;     /* subtle gray */
-  background: #fff;
-  color: #111827;                 /* near-black */
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
   border-radius: 6px;
   text-decoration: none;
   font-size: 0.95rem;
@@ -305,8 +333,8 @@ html, body, .layout { overflow: visible; }
 }
 
 .back-btn:hover {
-  background: #f3f4f6;
-  border-color: #c7cad1;
+  background: color-mix(in srgb, var(--card), var(--text) 6%);
+  border-color: color-mix(in srgb, var(--border), var(--text) 10%);
 }
 
 
@@ -319,9 +347,11 @@ section {
   max-width: var(--section-max);
   margin: 2rem auto;
   padding: 1rem;
-  background-color: white;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  background-color: var(--card);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border); /* keep consistent with cards */
 }
+
 
 /* typography respects zoom */
 h1, h2, h3 { line-height: 1.2; }
