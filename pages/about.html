@@ -88,5 +88,63 @@
         <p>Contact: <a href="mailto:twschmidt2001@gmail.com">twschmidt2001@gmail.com</a> | (208) 660-0234 | <a href="https://www.linkedin.com/in/thomaschmidt">LinkedIn</a> | <a href="https://github.com/TWi5td">GitHub</a></p>
         <p>&copy; 2025 Thomas Schmidt. All rights reserved.</p>
     </footer>
+    
+    <script>
+        (function () {
+            const STORAGE_KEY = 'ts-theme';
+            const root = document.documentElement;
+            const checkbox = document.getElementById('theme-switch');
+        
+            function applyTheme(theme) {
+                root.classList.remove('theme-light', 'theme-dark');
+                if (theme) root.classList.add('theme-' + theme);
+            }
+            
+            function systemPref() {
+                return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            }
+        
+            function updateThemeColorMeta() {
+                let meta = document.querySelector('meta[name="theme-color"]');
+                if (!meta) {
+                    meta = document.createElement('meta');
+                    meta.name = 'theme-color';
+                    document.head.appendChild(meta);
+                }
+                const bg = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim();
+                meta.setAttribute('content', bg || '#0b0f14');
+            }
+        
+            // Initialize state
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved === 'light' || saved === 'dark') {
+                applyTheme(saved);                 // enforce saved preference
+                checkbox.checked = (saved === 'dark');
+            } else {
+                // No saved preference: follow system, don’t set a class
+                checkbox.checked = (systemPref() === 'dark');
+            }
+            updateThemeColorMeta();
+        
+            // Toggle handler
+            checkbox.addEventListener('change', () => {
+                const t = checkbox.checked ? 'dark' : 'light';
+                applyTheme(t);
+                localStorage.setItem(STORAGE_KEY, t);
+                updateThemeColorMeta();
+            });
+        
+            // Follow system only when no manual choice is saved
+            const mq = window.matchMedia('(prefers-color-scheme: dark)');
+            mq.addEventListener('change', (e) => {
+                if (!localStorage.getItem(STORAGE_KEY)) {
+                  root.classList.remove('theme-light', 'theme-dark');  // return to system
+                  checkbox.checked = e.matches;
+                  updateThemeColorMeta();
+                }
+            });
+        })();
+    </script>
+    
 </body>
 </html>
