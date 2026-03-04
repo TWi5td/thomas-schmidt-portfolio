@@ -385,7 +385,7 @@ section * {
 
 /* --- Top-left fixed placement --- */
 .theme-toggle-fixed {
-  position: fixed;
+  position: absolute;
   top: 8px;
   left: 8px;
   z-index: 9999;
