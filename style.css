@@ -22,7 +22,7 @@ header {
 
 .header-row {
   display: grid;
-  grid-template-columns: ax-content 1fr max-content; /* left | center | right */
+  grid-template-columns: max-content 1fr max-content; /* left | center | right */
   align-items: center;
   width: 100%;
   padding-inline: 0;                    /* no side padding */
