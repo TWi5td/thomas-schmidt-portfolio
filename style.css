@@ -4,16 +4,16 @@ body {
   font-family: 'Arial', sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f4f4f4;
-  color: #333;
+  background-color: var(--bg);
+  color: var(--text);
   line-height: 1.6;
 }
 
 header {
   
   /*background: linear-gradient(90deg, #004e9a, #00a3e0);*/
-  background-color: #004080; /* Professional dark blue */
-  color: white;
+  background-color: var(--brand);
+  color: var(--brand-contrast);
   text-align: center;
   padding: 2em 0;
 }
@@ -78,13 +78,14 @@ section {
   max-width: 800px;
   margin: 2em auto;
   padding: 1em;
-  background-color: white;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  background-color: var(--card);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
 }
 
 .welcome h2, .skills h2 {
-  color: #004080;
-  border-bottom: 2px solid #004080;
+  color: var(--accent);
+  border-bottom: 2px solid var(--accent);
   padding-bottom: 0.3em;
 }
 
@@ -93,7 +94,8 @@ section {
   padding: 0;
 }
 .skills ul li {
-  background: #e0e0e0;
+  background: var(--chip);
+  color: var(--text);
   margin: 0.5em 0;
   padding: 0.5em;
   border-radius: 5px;
@@ -102,14 +104,14 @@ section {
 footer {
   text-align: center;
   padding: 1em 0;
-  background-color: #004080;
-  color: white;
+  background-color: var(--brand);
+  color: var(--brand-contrast);
   position: relative;
   bottom: 0;
   width: 100%;
 }
 footer a {
-  color: #add8e6;
+  color: var(--link-muted);
   text-decoration: none;
 }
 footer a:hover {
@@ -139,7 +141,56 @@ footer a:hover {
   --page-gap: clamp(0.75rem, 2vw, 2rem);
   --sticky-top: 1rem;
   --section-max: min(90vw, 80rem); /* fluid bounded main width */
+
+  
+  /* light mode defaults */
+  --bg: #f4f4f4;
+  --text: #333333;
+  --card: #ffffff;
+  --shadow: 0 0 10px rgba(0,0,0,0.1);
+
+  --brand: #004080;        /* header/footer blue */
+  --brand-contrast: #ffffff;
+
+  --link: #ffffff;         /* header/top-links/school-links on brand bg */
+  --link-muted: #add8e6;   /* footer links */
+  --accent: #004080;       /* section headings/borders */
+  --chip: #e0e0e0;         /* skills list item background */
+  --border: #d1d5db;       /* subtle borders */
+  --toc-border: #e5eaf2;   /* TOC vertical guide */
+  --toc-link: #000000;     /* TOC link color */
 }
+
+
+/* Auto‑dark mode (follows OS/browser) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b0f14;
+    --text: #e5e7eb;
+    --card: #0f172a;                  /* slate-900-ish */
+    --shadow: 0 0 10px rgba(0,0,0,0.35);
+
+    --brand: #0a2540;                 /* darker header/footer */
+    --brand-contrast: #e5e7eb;
+
+    --link: #c7e0ff;                  /* header/top links */
+    --link-muted: #9cc6ff;            /* footer links */
+    --accent: #93c5fd;                /* section heading border */
+    --chip: #1f2937;                  /* skills chip bg */
+    --border: #374151;                /* subtle dark border */
+    --toc-border: #253043;
+    --toc-link: #dbeafe;
+  }
+}
+
+/* manual overrides via JS toggle */
+:root.theme-light { color-scheme: light; }
+:root.theme-dark  { color-scheme: dark; }
+
+img.on-dark-adjust {
+  filter: brightness(1.05) contrast(1.05);
+}
+
 
 /* ---- Three-column grid: LEFT rail | MAIN | EMPTY RIGHT ---- */
 .layout {
@@ -189,7 +240,7 @@ html, body, .layout { overflow: visible; }
 .toc li > ul {
   margin-left: 1rem;
   padding-left: 0.75rem;          /* spacing between border and text */
-  border-left: 2px solid #e5eaf2; /* subtle vertical guide */
+  border-left: 2px solid var(--toc-border); /* subtle vertical guide */
 }
 
 /* Item spacing */
@@ -200,7 +251,7 @@ html, body, .layout { overflow: visible; }
 
 /* toc links */
 .toc a {
-  color: black;           /* professional dark blue */
+  color: var(--toc-link);           /* professional dark blue */
   text-decoration: none;
 }
 .toc a:hover {
@@ -211,6 +262,25 @@ html, body, .layout { overflow: visible; }
   outline: 2px solid currentColor;
   outline-offset: 2px;
   text-decoration: none;
+}
+
+.theme-toggle {
+  display: flex;
+  justify-content: flex-end;
+  max-width: var(--section-max);
+  margin: 0 auto;
+  padding: 0 .5rem;
+}
+#theme-toggle {
+  background: transparent;
+  color: var(--brand-contrast);
+  border: 1px solid color-mix(in srgb, var(--brand-contrast), black 40%);
+  padding: .4rem .7rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+#theme-toggle:hover {
+  background: color-mix(in srgb, var(--brand), white 10%);
 }
 
 
