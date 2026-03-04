@@ -308,7 +308,11 @@ html, body, .layout { overflow: visible; }
   cursor: pointer;
   top: 8px;
   left: 8px;
-  z-index: 9999;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
 }
 #theme-toggle:hover {
   background: color-mix(in srgb, var(--brand), white 10%);
@@ -382,6 +386,12 @@ section * {
     position: static;
     margin-bottom: var(--page-gap);
   }
+  .theme-toggle {
+    top: 6px;
+    right: 6px;
+    transform: scale(0.92);
+    transform-origin: top right; /* or top left if you use left alignment */
+  }  
 }
 
 /* --- Accessible screen-reader text --- */
