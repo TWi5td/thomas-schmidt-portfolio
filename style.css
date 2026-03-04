@@ -41,7 +41,7 @@ header h1 {
 }
 
 /* Absolutely position the  slightly away from the left edge */
-.header-row . {
+.header-row .switch {
   position: absolute;
   left: 10px;                    /* <-- your desired inset (try 8–12px) */
   top: 50%;
