@@ -40,8 +40,8 @@ header h1 {
   white-space: nowrap;           /* optional: keep on one line */
 }
 
-/* Absolutely position the switch slightly away from the left edge */
-.header-row .switch {
+/* Absolutely position the  slightly away from the left edge */
+.header-row . {
   position: absolute;
   left: 10px;                    /* <-- your desired inset (try 8–12px) */
   top: 50%;
@@ -431,7 +431,7 @@ section * {
   border: 0;
 }
 
-/* --- Slider switch --- */
+/* --- Slider  --- */
 .switch {
   position: relative;
   display: inline-block;
@@ -447,6 +447,7 @@ section * {
   margin: 0;
   cursor: pointer;
 }
+
 .switch .slider {
   position: absolute;
   inset: 0;
@@ -455,7 +456,38 @@ section * {
   border-radius: 999px;
   transition: background .2s ease, border-color .2s ease;
   box-shadow: 0 1px 2px rgba(0,0,0,.15);
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  pointer-events: none; /* clicks pass through to input */
 }
+
+.switch .icon-moon,
+.switch .icon-sun {
+  font-size: 14px;
+  line-height: 1;
+  pointer-events: none;
+  transition: opacity .2s ease, transform .2s ease, filter .2s ease;
+}
+
+/* Left-align moon, right-align sun */
+.switch .icon-moon { justify-self: start; margin-left: 7px;  opacity: 0.85; }
+.switch .icon-sun  { justify-self: end;   margin-right: 7px; opacity: 0.5;  }
+
+/* When checked (dark theme), highlight sun, dim moon */
+.switch input:checked + .slider .icon-moon { opacity: 0.5;  transform: translateX(4px); }
+.switch input:checked + .slider .icon-sun  { opacity: 0.95; transform: translateX(-4px); }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .switch .icon-moon,
+  .switch .icon-sun {
+    transition: none;
+    transform: none;
+  }
+}
+
 .switch .slider::before {
   content: "";
   position: absolute;
