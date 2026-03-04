@@ -299,6 +299,7 @@ html, body, .layout { overflow: visible; }
   padding: 0 .5rem;
 }
 #theme-toggle {
+  position: static;
   background: transparent;
   color: var(--brand-contrast);
   border: 1px solid color-mix(in srgb, var(--brand-contrast), black 40%);
