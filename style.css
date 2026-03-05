@@ -448,6 +448,7 @@ section * {
   cursor: pointer;
 }
 
+/* Layout for the slider track that contains the icons */
 .switch .slider {
   position: absolute;
   inset: 0;
@@ -458,50 +459,47 @@ section * {
   box-shadow: 0 1px 2px rgba(0,0,0,.15);
 
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr; /* left | right */
   align-items: center;
-  pointer-events: none; /* clicks pass through to input */
+  pointer-events: none;           /* clicks pass through to input */
 }
 
-/* Default (light mode unless overridden by saved or system): 
-   Moon visible, Sun invisible */
-.switch .icon-moon { 
-  justify-self: start; 
-  margin-left: 7px;  
-  opacity: 0.95; 
-  visibility: hidden; 
-}
-.switch .icon-sun  { 
-  justify-self: end;   
-  margin-right: 7px; 
-  opacity: 0;         /* invisible */
-  visibility: Visible; /* optional: make it non-visible to AT & hit-testing */
-}
-
+/* Base icon styles */
 .switch .icon-moon,
 .switch .icon-sun {
   font-size: 15px;
   line-height: 1;
   pointer-events: none;
-  transition: opacity .2s ease, transform .2s ease, filter .2s ease, visibility 0s linear .2s;
-  /* ^ visibility is delayed until after opacity finishes to avoid flicker */
+  transition:
+    opacity .2s ease,
+    transform .2s ease,
+    filter .2s ease,
+    visibility 0s linear .2s; /* delay visibility change until fade completes */
 }
 
-/* Left-align moon, right-align sun */
-.switch .icon-moon { justify-self: start; margin-left: 7px;  opacity: 0.85; }
-.switch .icon-sun  { justify-self: end;   margin-right: 7px; opacity: 0.5;  }
+/* Place them at the ends */
+.switch .icon-moon { justify-self: start; margin-left: 7px; }
+.switch .icon-sun  { justify-self: end;   margin-right: 7px; }
 
-/* When checked (dark theme), highlight sun, dim moon */
-.switch input:checked + .slider .icon-moon { 
-  opacity: 0;  
-  visibility: visible; 
-  transform: translateX(0); 
-}
-.switch input:checked + .slider .icon-sun  { 
+/* Default = LIGHT MODE (input NOT checked): Sun visible, Moon hidden */
+.switch .icon-moon { opacity: 0;   visibility: hidden; transform: translateX(0); }
+.switch .icon-sun  { opacity: 0.95; visibility: visible; transform: translateX(0); }
+
+/* DARK MODE (input checked): Moon visible, Sun hidden */
+.switch input:checked + .slider .icon-moon {
   opacity: 0.95; 
-  visibility: hidden; 
-  transform: translateX(0); 
+  visibility: visible; 
+  transform: translateX(0);
+  transition: opacity .2s ease, transform .2s ease, filter .2s ease, visibility 0s;
+  /* ^ override the visibility delay so it becomes visible immediately when checked */
 }
+.switch input:checked + .slider .icon-sun  {
+  opacity: 0;    
+  visibility: 
+  hidden; 
+  transform: translateX(0);
+}
+
 
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
