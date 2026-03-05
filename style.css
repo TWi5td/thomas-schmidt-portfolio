@@ -463,12 +463,28 @@ section * {
   pointer-events: none; /* clicks pass through to input */
 }
 
+/* Default (light mode unless overridden by saved or system): 
+   Moon visible, Sun invisible */
+.switch .icon-moon { 
+  justify-self: start; 
+  margin-left: 7px;  
+  opacity: 0.95; 
+  visibility: visible; 
+}
+.switch .icon-sun  { 
+  justify-self: end;   
+  margin-right: 7px; 
+  opacity: 0;         /* invisible */
+  visibility: hidden; /* optional: make it non-visible to AT & hit-testing */
+}
+
 .switch .icon-moon,
 .switch .icon-sun {
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1;
   pointer-events: none;
-  transition: opacity .2s ease, transform .2s ease, filter .2s ease;
+  transition: opacity .2s ease, transform .2s ease, filter .2s ease, visibility 0s linear .2s;
+  /* ^ visibility is delayed until after opacity finishes to avoid flicker */
 }
 
 /* Left-align moon, right-align sun */
@@ -476,8 +492,16 @@ section * {
 .switch .icon-sun  { justify-self: end;   margin-right: 7px; opacity: 0.5;  }
 
 /* When checked (dark theme), highlight sun, dim moon */
-.switch input:checked + .slider .icon-moon { opacity: 0.5;  transform: translateX(4px); }
-.switch input:checked + .slider .icon-sun  { opacity: 0.95; transform: translateX(-4px); }
+.switch input:checked + .slider .icon-moon { 
+  opacity: 0;  
+  visibility: hidden; 
+  transform: translateX(4px); 
+}
+.switch input:checked + .slider .icon-sun  { 
+  opacity: 0.95; 
+  visibility: visible; 
+  transform: translateX(-4px); 
+}
 
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
@@ -511,3 +535,5 @@ section * {
   transform: translate(24px, -50%);
 }
 
+:root.theme-dark .switch .icon-sun { filter: brightness(1.1) contrast(1.05); }
+:root.theme-light .switch .icon-moon { filter: brightness(1.05) contrast(1.02); }
