@@ -11,6 +11,10 @@ body {
 
 /* Header as positioning context */
 header {
+  /* Shadow the theme variables locally so header stays "light" */
+  --brand: #004080;          /* same as light mode */
+  --brand-contrast: #ffffff; /* same as light mode */
+  --link: #ffffff;           /* for top-links/school-links inside header */
   background-color: var(--brand);
   color: var(--brand-contrast);
   text-align: center;
